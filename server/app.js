@@ -1,36 +1,23 @@
 const express = require('express')
-const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const port = 3000
 
+const app = express()
 
 
 // We are using our packages here
-app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use( bodyParser.json() );
 
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
- extended: true})); 
 app.use(cors())
+
+app.use(bodyParser.urlencoded({extended: true})); 
 
 //You can use this to check if your server is working
 app.get('/', (req, res)=>{
-res.send("Welcome to your server")
+    res.send(`Welcome to your server, your listening on port: ${port}`)
 })
 
-
-//Route that handles login logic
-app.post('/login', (req, res) =>{
-    console.log(req.body.username) 
-    console.log(req.body.password) 
-})
-
-//Route that handles signup logic
-app.post('/signup', (req, res) =>{
-console.log(req.body.fullname) 
-console.log(req.body.username)
-console.log(req.body.password) 
-})
 
 //Start your server on a specified port
 app.listen(port, ()=>{
