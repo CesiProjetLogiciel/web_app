@@ -5,7 +5,6 @@
       <router-link to="/login">Login</router-link> |
       <router-link to="/register">Register as a client</router-link> |
       <router-link to="/registerRestorer">Register as a restorer</router-link>
-      
     </nav>
     <router-view/>
   </div>
@@ -26,7 +25,7 @@ nav {
 
 nav a {
   font-weight: bold;
-  color: #2c3e50;
+  color: black;
 }
 
 nav a.router-link-exact-active {

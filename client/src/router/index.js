@@ -1,9 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import registerClient from '../views/clientsPart/registerClient.vue'
-import registerRestorer from '../views/restorer/registerRestorer.vue'
+import registerClient from '../views/registerClient.vue'
+import registerRestorer from '../views/registerRestorer.vue'
 import loginPage from '../views/loginPage.vue'
+
+// Client part
+import HomeClient from '../views/clientsPart/homeClient.vue'
+import Orders from '../views/clientsPart/orders.vue'
+import Parameters from '../views/clientsPart/parameters.vue'
+import Profile from '../views/clientsPart/profile.vue'
 
 Vue.use(VueRouter)
 
@@ -11,7 +16,7 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeClient
   },
   { // Register page for the client
     path: '/register',
@@ -27,6 +32,26 @@ const routes = [
     path: '/login',
     name: 'login',
     component: loginPage
+  },
+  {
+    path: '/homePage',
+    name: 'homepage',
+    component: HomeClient
+  },
+  {
+    path: '/ordersClient',
+    name: 'OrdersClient',
+    component: Orders
+  },
+  {
+    path: '/profileClient',
+    name: 'profileClient',
+    component: Profile
+  },
+  {
+    path: '/parametersClient',
+    name: 'parametersClient',
+    component: Parameters
   }
 ]
 

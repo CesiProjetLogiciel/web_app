@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <Navbar firstLink="Accueil" sndLink="Commandes" thirdLink="Profil" fourthLink="Paramètres"/>
     <h1>Register as a restorer</h1>
     <form @submit.prevent="handleSubmit">
       <div>
@@ -36,7 +37,12 @@
 </template>
 
 <script>
+import Navbar from '../components/navbarClient.vue'
+
 export default {
+  components: {
+    Navbar,
+  },
   data() {
     return {
       email: "",

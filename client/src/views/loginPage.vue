@@ -21,6 +21,7 @@ export default {
     return {
       email: "",
       password: "",
+      passwordError: "",
     };
   },
   methods: {

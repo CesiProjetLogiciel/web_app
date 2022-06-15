@@ -18,20 +18,30 @@
       </div>
 
       <div class="address">
-        <label>Address:</label>
-        <input type="text" v-model="address" required />
+        <div>
+          <label>Address:</label>
+          <input type="text" v-model="address" required />
+        </div>
 
-        <label>Zipcode:</label>
-        <input type="text" v-model="zipcode" required />
+        <div>
+          <label>Zipcode:</label>
+          <input type="text" v-model="zipcode" required />
+        </div>
 
-        <label>Country</label>
-        <input type="text" v-model="country" required />
+        <div>
+          <label>Country</label>
+          <input type="text" v-model="country" required />
+        </div>
 
-        <label>City:</label>
-        <input type="text" v-model="city" required />
+        <div>
+          <label>City:</label>
+          <input type="text" v-model="city" required />
+        </div>
 
-        <label>State:</label>
-        <input type="text" v-model="state" required />
+        <div>
+          <label>State:</label>
+          <input type="text" v-model="state" required />
+        </div>
       </div>
 
       <div>
