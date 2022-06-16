@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import { login } from "../../service.js"
+
 export default {
   data() {
     return {
@@ -26,10 +28,9 @@ export default {
   },
   methods: {
     handleSubmit() {
-      //Validate password field length
       console.log("connecting..");
-      // connect to the AUTH system
-    },
+      login(this.email, this.password);
+},
   },
 };
 </script>
