@@ -22,6 +22,7 @@ app.post("/loginClient", function (req, res) {
   console.log("------------------");
   console.log("app.js received the login request--->", req.body);
   console.log("------------------");
+  res.send("CONNECTION IS OK");
 });
 
 app.listen(port, () => {

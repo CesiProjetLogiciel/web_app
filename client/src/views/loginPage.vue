@@ -27,9 +27,16 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       console.log("connecting..");
-      login(this.email, this.password);
+      try {
+        await login(this.email, this.password);
+        console.log("Connection front ok");
+
+      } catch (error) {
+        console.log(error);
+      }
+
 },
   },
 };
