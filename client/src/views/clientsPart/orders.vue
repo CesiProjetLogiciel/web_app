@@ -2,6 +2,22 @@
   <div class="home">
     <NavbarClient />
     <h1>ORDERS</h1>
+    <div class="cards">
+      <div class="card order">
+        <h3 class="order_number">Commande n°1234</h3>
+        <h5 class="order_status">Status : accepted by the restorer</h5>
+        <button>Contacter le livreur</button>
+        <button>Aide/Signaler un problème</button>
+      </div>
+
+      <div class="card order">
+        <h3 class="order_number">Commande n°1234</h3>
+        <h5 class="order_status">Status : ended</h5>
+        <button>Contacter le livreur</button>
+        <button>Aide/Signaler un problème</button>
+        <button>Supprimer de l'historique</button>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -15,3 +31,13 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.card {
+  background-color: rgb(218, 210, 210);
+  box-shadow: 1px 1px 1px grey;
+  border-radius: 5px;
+  padding: 5px;
+  margin: 10px;
+}
+</style>

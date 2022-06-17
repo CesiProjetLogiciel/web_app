@@ -17,7 +17,11 @@ app.get("/", (req, res) => {
   res.send(`Welcome to your server, your listening on port: ${port}`);
 });
 
-// getting the login request from service.js and handles it
+////////////////////////////////////////////////////////////
+// Call functions //////////////////////////////////////////
+////////////////////////////////////////////////////////////
+
+// Login function
 app.post("/loginClient", function (req, res) {
   console.log("------------------");
   console.log("app.js received the login request--->", req.body);
@@ -25,6 +29,9 @@ app.post("/loginClient", function (req, res) {
   res.send("CONNECTION IS OK");
 });
 
+
+
+//////////////////////////////////////////
 app.listen(port, () => {
   console.log(`Server is runing on port ${port}`);
 });
