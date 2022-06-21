@@ -1,17 +1,65 @@
 <template>
-  <div class="home">
-    <HelloWorld msg="Welcome on the Ces'Eats application"/>
+  <div class="container_home">
+    <div class="title">
+      <NavBar />
+      <h1>HOME</h1>
+    </div>
+    <div class="body">
+      <div class="cards">
+        <div class="card">
+          <h2>Client Name</h2>
+          <p>Distance restaurant - client</p>
+          <p>Rénumération:</p>
+          <button>Prise en charge</button>
+        </div>
+
+        <div class="card">
+          <h2>Restaurant name</h2>
+          <p>Description</p>
+        </div>
+
+        <div class="card">
+          <h2>Restaurant name</h2>
+          <p>Description</p>
+        </div>
+
+        <div class="card">
+          <h2>Restaurant name</h2>
+          <p>Description</p>
+        </div>
+      </div>
+    </div>  
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import NavBar from "../../components/navbarClient.vue";
 
 export default {
-  name: 'HomeView',
+  name: 'deliveryManHomePage',
   components: {
-    HelloWorld
+    NavBar
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.cards {
+  border: 1px solid red;
+  box-shadow: 1px 1px 1px black;
+  display: flex;
+  width: 99%;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card {
+  border: 1px solid blue;
+  margin: 2px;
+  width: 48%;
+  img {
+    width: 100px;
+  }
+}
+</style>
