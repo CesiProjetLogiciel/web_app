@@ -12,14 +12,7 @@
           <p>Addresse Client</p>
           <p>Adresse Restaurant</p>
           <p>Rénumération:</p>
-        </div>
-
-        <div class="card">
-          <h2>Client Name</h2>
-          <p>Distance restaurant - client</p>
-          <p>Addresse Client</p>
-          <p>Adresse Restaurant</p>
-          <p>Rénumération:</p>
+          <button>Commande récupérée</button>
           <button>Commande livrée</button>
         </div>
 
@@ -29,6 +22,8 @@
           <p>Addresse Client</p>
           <p>Adresse Restaurant</p>
           <p>Rénumération:</p>
+          <button>Commande récupérée</button>
+          <button>Commande livrée</button>
         </div>
 
         <div class="card">
@@ -37,6 +32,18 @@
           <p>Addresse Client</p>
           <p>Adresse Restaurant</p>
           <p>Rénumération:</p>
+          <button>Commande récupérée</button>
+          <button>Commande livrée</button>
+        </div>
+
+        <div class="card">
+          <h2>Client Name</h2>
+          <p>Distance restaurant - client</p>
+          <p>Addresse Client</p>
+          <p>Adresse Restaurant</p>
+          <p>Rénumération:</p>
+          <button>Commande récupérée</button>
+          <button>Commande livrée</button>
         </div>
       </div>
     </div>  
