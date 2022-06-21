@@ -13,6 +13,8 @@
           <p>Adresse Restaurant</p>
           <p>Rénumération:</p>
           <button>Prise en charge</button>
+          <button>Commande récupérée</button>
+          <button>Commande livrée</button>
         </div>
 
         <div class="card">
@@ -22,6 +24,8 @@
           <p>Adresse Restaurant</p>
           <p>Rénumération:</p>
           <button>Prise en charge</button>
+          <button>Commande récupérée</button>
+          <button>Commande livrée</button>
         </div>
 
         <div class="card">
@@ -31,6 +35,8 @@
           <p>Adresse Restaurant</p>
           <p>Rénumération:</p>
           <button>Prise en charge</button>
+          <button>Commande récupérée</button>
+          <button>Commande livrée</button>
         </div>
 
         <div class="card">
@@ -40,6 +46,8 @@
           <p>Adresse Restaurant</p>
           <p>Rénumération:</p>
           <button>Prise en charge</button>
+          <button>Commande récupérée</button>
+          <button>Commande livrée</button>
         </div>
       </div>
     </div>  
