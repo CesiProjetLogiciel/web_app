@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import { login } from "../../service.js"
+import { login } from "../../service.js";
 
 export default {
   data() {
@@ -32,12 +32,14 @@ export default {
       try {
         await login(this.email, this.password);
         console.log("Connection front ok");
-
       } catch (error) {
         console.log(error);
       }
+    },
 
-},
+    login() {
+      this.$auth.loginWithRedirect();
+    },
   },
 };
 </script>
