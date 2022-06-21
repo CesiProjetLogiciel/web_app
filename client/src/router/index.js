@@ -13,6 +13,9 @@ import Profile from '../views/profile.vue'
 // Restorer parts
 import RestorerHomePage from '../views/restorer/homeRestorer.vue'
 
+//DeliveryMan parts
+import homeDeliveryMan from '../views/deliveryMan/homeDeliveryMan.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -60,6 +63,11 @@ const routes = [
     path: '/restorerHomePage',
     name: 'restorerHomePage',
     component: RestorerHomePage
+  },
+  { // Restorer's Homepage Tab
+    path: '/deliveryManHomePage',
+    name: 'deliveryManHomePage',
+    component: homeDeliveryMan
   },
 ]
 
