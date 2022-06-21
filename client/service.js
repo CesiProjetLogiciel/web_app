@@ -1,9 +1,4 @@
-// file gonna be use to link send request on the server side
-
-export function writeLogs(msg) {
-  console.log(msg);
-}
-
+// file used to link send request on the server side
 export async function login(email, password) {
     console.log("service.js reached");
 
@@ -28,9 +23,11 @@ export async function login(email, password) {
     }  
 }
 
-
-
-/* if (!response.ok) {
-    throw new Error(`error-> ${response.status}`);
+export async function registerAsClient() {
+    console.log("Client registration request");
 }
-const data = await response.json(); */
+
+export async function registerAsRestorer() {
+    console.log("Restorer registration request");
+}
+

@@ -7,8 +7,8 @@ import loginPage from '../views/loginPage.vue'
 // Client parts
 import HomeClient from '../views/clientsPart/homeClient.vue'
 import Orders from '../views/clientsPart/orders.vue'
-import Parameters from '../views/clientsPart/parameters.vue'
-import Profile from '../views/clientsPart/profile.vue'
+import Parameters from '../views/parameters.vue'
+import Profile from '../views/profile.vue'
 
 // Restorer parts
 import RestorerHomePage from '../views/restorer/homeRestorer.vue'
@@ -47,13 +47,13 @@ const routes = [
     component: Orders
   },
   { // Client's Profil Tab 
-    path: '/profileClient',
-    name: 'profileClient',
+    path: '/profilePage',
+    name: 'profilePage',
     component: Profile
   },
   { // Client's parameters Tab
-    path: '/parametersClient',
-    name: 'parametersClient',
+    path: '/parameters',
+    name: 'parameters',
     component: Parameters
   },
   { // Restorer's Homepage Tab
