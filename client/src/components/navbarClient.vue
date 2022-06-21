@@ -11,6 +11,11 @@
       <router-link to="/">Commandes Reçues</router-link> |
       <router-link to="/profilePage">Profil</router-link> |
       <router-link to="/parameters">Paramètres</router-link>
+      <p>DeliveryMan</p>
+      <router-link to="/deliveryManHomePage">Accueil Livreur</router-link> |
+      <router-link to="/ordersDeliveryMan">Commandes terminées</router-link> |
+      <router-link to="/profilePage">Profil</router-link> |
+      <router-link to="/parameters">Paramètres</router-link>
     </nav>
 
     <router-view />
