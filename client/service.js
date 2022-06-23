@@ -35,10 +35,14 @@ export async function registerAsRestorer() {
 // Client part
 export async function getRestaurantsList() {
   try {
-    axios.get("http://", "parameters"); // Mettre en paramètre quels restaurants afficher
+    const restaurantsList = await axios.get("http://localhost:5000/restaurants/"); // Mettre en paramètre quels restaurants afficher
+    console.log(restaurantsList)
+    return restaurantsList
   } catch (err) {
     console.log(err);
   }
+
+  
 }
 
 export async function getDishesList() {

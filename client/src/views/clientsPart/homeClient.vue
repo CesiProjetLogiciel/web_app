@@ -18,34 +18,6 @@
           <h2>Restaurant name</h2>
           <p>Description</p>
         </div>
-
-        <div class="card">
-          <img src="../../assets/logo.png" alt="image" />
-          <h2>Restaurant name</h2>
-          <p>Description</p>
-        </div>
-
-        <div class="card">
-          <img src="../../assets/logo.png" alt="image" />
-          <h2>Restaurant name</h2>
-          <p>Description</p>
-        </div>
-
-        <div class="card">
-          <img src="../../assets/logo.png" alt="image" />
-          <h2>Restaurant name</h2>
-          <p>Description</p>
-        </div>
-        <div class="card">
-          <img src="../../assets/logo.png" alt="image" />
-          <h2>Restaurant name</h2>
-          <p>Description</p>
-        </div>
-        <div class="card">
-          <img src="../../assets/logo.png" alt="image" />
-          <h2>Restaurant name</h2>
-          <p>Description</p>
-        </div>
       </div>
     </div>
   </div>
@@ -55,11 +27,19 @@
 import NavbarClient from "../../components/navbarClient.vue";
 import BasketIcon from "../../components/basket.vue";
 
+import { getRestaurantsList } from "../../../service.js";
+
 export default {
   name: "HomeView",
   components: {
     NavbarClient,
     BasketIcon,
+  },
+  beforeMount() {
+    getRestaurantsList();
+  },
+  methods: {
+
   },
 };
 </script>
