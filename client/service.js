@@ -33,24 +33,33 @@ export async function registerAsRestorer() {
 
 //////////////
 // Client part
+
+const distAddress = "http://localhost:5000";
+
 export async function getRestaurantsList() {
   try {
-    const restaurantsList = await axios.get("http://localhost:5000/restaurants/"); // Mettre en paramètre quels restaurants afficher
-    console.log(restaurantsList)
-    return restaurantsList
+    const restaurantsList = await axios.get(distAddress + '/restaurants/'); // Mettre en paramètre quels restaurants afficher
+    const datas = restaurantsList.data.data;
+    return datas;
   } catch (err) {
     console.log(err);
   }
-
-  
+  return;
 }
 
-export async function getDishesList() {
+export async function getDishesList(restaurantId) {
   try {
-    axios.get("http://", "parameters"); // Mettre en paramètre pour quels restaurant afficher les plats
+    const dishesList = await axios.get(distAddress + '/dishes/', {
+      params: {
+        id: restaurantId
+      }
+    }) // Mettre en paramètre quels restaurants afficher
+    const datas = dishesList.data.data;
+    return datas;
   } catch (err) {
     console.log(err);
   }
+  return;
 }
 
 export async function addToBasket() {

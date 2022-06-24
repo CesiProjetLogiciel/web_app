@@ -1,11 +1,11 @@
 <template>
-  <div class="navbar_container">
+  <div class="navbar_container"> <!-- v-if depending of the type of connection -->
     <nav>
       <p>Client</p>
       <router-link to="/homePage">Accueil</router-link> |
       <router-link to="/ordersClient">Commandes</router-link> |
       <router-link to="/profilePage">Profil</router-link> |
-      <router-link to="/parameters">Paramètres</router-link>
+      <router-link to="/basket">Panier</router-link>
       <p>Restorer</p>
       <router-link to="/restorerHomePage">Accueil Resto</router-link> |
       <router-link to="/">Commandes Reçues</router-link> |

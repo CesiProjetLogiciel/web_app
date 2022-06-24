@@ -9,6 +9,7 @@ import HomeClient from '../views/clientsPart/homeClient.vue'
 import Orders from '../views/clientsPart/orders.vue'
 import Parameters from '../views/parameters.vue'
 import Profile from '../views/profile.vue'
+import BasketClient from '../views/clientsPart/cart.vue'
 
 // Restorer parts
 import RestorerHomePage from '../views/restorer/homeRestorer.vue'
@@ -75,6 +76,11 @@ const routes = [
     path: '/ordersDeliveryMan',
     name: 'ordersDeliveryMan',
     component: ordersDeliveryMan
+  },
+  { // Client's basket
+    path: '/basket',
+    name: 'BasketClient',
+    component: BasketClient
   },
 ]
 

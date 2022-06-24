@@ -8,6 +8,9 @@ import { domain, clientId } from "../auth_config.json";
 // Import the plugin here
 import { Auth0Plugin } from "./auth";
 
+// Store management
+import { store } from './store/index.js';
+
 // Install the authentication plugin here
 Vue.use(Auth0Plugin, {
   domain,
@@ -25,5 +28,6 @@ Vue.config.productionTip = false;
 
 new Vue({
   router,
+  store: store,
   render: (h) => h(App),
 }).$mount("#app");

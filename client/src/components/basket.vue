@@ -1,12 +1,17 @@
 <template>
-    <button type="button" class="basket_button">
-      <img src="../assets/logo.png" alt="basket" />
-    </button>
+  <button type="button" class="basket_button">
+    <img src="../assets/logo.png" alt="basket" />
+  </button>
 </template>
 
 <script>
 export default {
   name: "BasketIcon",
+  data() {
+    return {
+      test: "maybe",
+    };
+  },
 };
 </script>
 
