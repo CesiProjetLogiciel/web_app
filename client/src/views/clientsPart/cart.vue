@@ -1,14 +1,18 @@
 <template>
   <div class="container_home">
-    <BasketIcon />
     <div class="title">
       <NavbarClient />
       <h1>Panier</h1>
     </div>
+
     <div class="body">
-      <div class="cards">
-        <div class="card">
-          <CartArticle v-for='dish in this.$store.state' :key='dish.name'/>
+      <div v-if='!isCartEmpty' class="cards">
+        <div v-for="object in getCartList" :key="object.id" class="card">
+          <h4>1 x {{ object.productName }}</h4>
+          <h5>{{ object.productPrice}} €</h5>
+        </div>
+
+        <div v-if='isCartEmpty' class="cards">Votre panier est vide.
         </div>
       </div>
     </div>
@@ -17,21 +21,21 @@
 
 <script>
 import NavbarClient from "../../components/navbarClient.vue";
-import BasketIcon from "../../components/basket.vue";
-import CartArticle from "../../components/article.vue";
+
+import { store } from "../../store/index";
 
 export default {
   name: "HomeView",
+  computed: {
+    getCartList() {
+      return store.state.products;
+    },
+  },
   components: {
     NavbarClient,
-    BasketIcon,
-    CartArticle,
   },
   data() {
-    return {
-      products: [],
-      cart: null,
-    };
+    return {};
   },
   async beforeMount() {},
   methods: {},
