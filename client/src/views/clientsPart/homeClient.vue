@@ -1,6 +1,5 @@
 <template>
   <div class="container_home">
-
     <div class="title">
       <NavbarClient />
       <h1>HOME</h1>
@@ -8,12 +7,17 @@
 
     <div class="body">
       <div v-if="!isRestaurantOpen" class="cards">
-        <div class="card" v-for="restaurant in restaurantsList" :key="restaurant.id">
+        <div
+          class="card"
+          v-for="restaurant in restaurantsList"
+          :key="restaurant.id"
+        >
           <h1>{{ restaurant.name }}</h1>
           <h3>{{ restaurant.category }}</h3>
-          <p>{{ restaurant.description }}</p>
-          <p>{{ restaurant.id }}</p>
-          <button v-on:click="getDishesList(/*restaurant.id*/)">get dishes</button>
+          <p>"{{ restaurant.description }}"</p>
+          <button v-on:click="getDishesList(/*restaurant.id*/)">
+            Voir le restaurant
+          </button>
         </div>
       </div>
 
@@ -22,10 +26,11 @@
           <h1>{{ dish.name }}</h1>
           <h3>{{ dish.category }}</h3>
           <p>{{ dish.description }}</p>
-          <p>{{ dish.id }}</p>
-          <button v-on:click="addToCart(dish.id, dish.name, dish.price)">Add to cart</button>
+          <h4>{{ dish.price }} €</h4>
+          <button v-on:click="addToCart(dish.id, dish.name, dish.price)">
+            Ajouter au panier
+          </button>
         </div>
-
       </div>
     </div>
   </div>
@@ -33,7 +38,7 @@
 
 <script>
 import NavbarClient from "../../components/navbarClient.vue";
-import { store } from '../../store/index';
+import { store } from "../../store/index";
 
 const service = require("../../../service");
 
@@ -43,9 +48,9 @@ export default {
     NavbarClient,
   },
   computed: {
-    countProducts () {
-      return store.state.products
-    }
+    countProducts() { // Allows to know the state of the cart
+      return store.state.products;
+    },
   },
   data() {
     return {
@@ -65,35 +70,22 @@ export default {
       const listDishes = await service.getDishesList("7");
       this.dishesList = listDishes;
     },
+
     addToCart(productId, productName, productPrice) {
-      const dishInfos = {'id': productId, 'productName': productName, 'productPrice': productPrice}
-      store.commit('addToCart', dishInfos);
-    }
+      var isPresent = store.getters.getProductsId(productId);
+      if (isPresent) {
+        var payload = {'price': productPrice, 'id': productId}
+        store.commit("increment", payload);
+      } else {
+        const dishInfos = {
+          id: productId,
+          productName: productName,
+          productPrice: productPrice,
+          quantity: 1,
+        };
+        store.commit("addToCart", dishInfos);
+      }
+    },
   },
 };
 </script>
-
-<style lang="scss" scoped>
-.cards {
-  background-color: rgb(188, 235, 202);
-  box-shadow: 1px 1px 1px black;
-  justify-content: center;
-  flex-wrap: wrap;
-  display: flex;
-  margin: auto;
-  width: 100%;
-}
-
-.card {
-  box-shadow: 2px 2px 1px rgb(85, 85, 85);
-  background-color: rgb(219, 219, 219);
-  border-radius: 5px;
-  margin: auto;
-  margin-top: 5px;
-  width: 100%;
-
-  img {
-    width: 100px;
-  }
-}
-</style>
