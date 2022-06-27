@@ -6,10 +6,10 @@ router.get('/restaurants', controller.getRestaurantsList)
 
 router.get('/dishes', controller.getDishesList)
 
-/* router.post('/', createProduct) 
+router.put('/modify', controller.modifyDish) 
 
-router.put('/:productID', updateProduct) 
+router.post('/add', controller.addDish) 
 
-router.delete('/:productID', deleteProduct)*/
+/*router.delete('/:productID', deleteProduct)*/
 
 module.exports = router;

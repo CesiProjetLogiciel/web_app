@@ -50,6 +50,10 @@ export async function getRestaurantsList() {
 export async function getDishesList(restaurantId) {
   try {
     const dishesList = await axios.get(distAddress + '/dishes/', {
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
       params: {
         id: restaurantId
       }
@@ -65,13 +69,48 @@ export async function getDishesList(restaurantId) {
 export async function addToBasket() {
   console.log("");
 }
-
 export async function order() {
   console.log("");
 }
 
 ////////////////
 // Restorer part
-export async function isOrderValidate() {
+export async function getMyDishesList() {
   console.log("");
+}
+
+export async function modifyDish(restaurantId, dishId, newName, newPrice) {
+  try {
+    const modifyDish = await axios.put(distAddress + '/modify/', {
+      data: {
+        id: restaurantId,
+        idToModify: dishId,
+        name: newName,
+        price: newPrice,
+      }
+    })
+    const datas = modifyDish.data.data;
+    return datas;
+  } catch (err) {
+    console.log(err);
+  }
+  return;
+}
+
+export async function addDish(restaurantId, dishName, dishDescription, dishPrice, dishImage) {
+  try {
+    const response = await axios.post(distAddress + '/add/', {
+      data: {
+        id: restaurantId,
+        dishName: dishName,
+        dishDescription: dishDescription,
+        dishPrice: dishPrice,
+        dishPicture: dishImage
+      },
+    })
+    return response.data;
+  } catch (e) {
+    console.log(e)
+  }
+  return;
 }

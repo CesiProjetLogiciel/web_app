@@ -73,7 +73,7 @@ export default {
 
     addToCart(productId, productName, productPrice) {
       var isPresent = store.getters.getProductsId(productId);
-      if (isPresent) {
+      if (isPresent) { // Check if a same product is already in the cart and increment qty
         var payload = {'price': productPrice, 'id': productId}
         store.commit("increment", payload);
       } else {

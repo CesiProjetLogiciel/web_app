@@ -14,7 +14,6 @@ export const store = new Vuex.Store({
       increment (state, payload) {
         var myId = payload['id']
         var myPrice = payload['price']
-        console.log(myId)
         var findIt = state.products.find(products => products.id === myId)
         findIt.quantity++;
         findIt.productPrice = findIt.productPrice + myPrice
