@@ -1,15 +1,18 @@
 <template>
   <div>
     <NavbarRestorer />
-    <h1>Mon anciennes commandes</h1>
-    <div class="cards">
-      <div class="card">
-        <h3 class="dish_name">Nom du client</h3>
-        <h3>Tarif</h3>
-        <h6 class="description">
-          Description détaillée du plat rédigée par le restaurateur
-        </h6>
+    <h1>Anciennces commandes</h1>
+    <div class="cards pending_orders">
+
+      <div v-for="order in awaitingList.data" :key="order.id" class="card">
+        <div v-if="order.status === 'DELIVERED'">
+          <h4>Numéro de la commande : {{ order.id }}</h4>
+          <h4>Articles commandés : {{ order.product_ids }}</h4>
+          <h4>Prix total de la commande : {{ order.price }} €</h4>
+          <h4>Livreur :{{ order.deliveryman_id }}</h4>
+        </div>
       </div>
+
     </div>
   </div>
 </template>
@@ -17,14 +20,19 @@
 <script>
 import NavbarRestorer from "../../components/navbarClient.vue";
 
-// const service = require("../../../service");
+const service = require("../../../service");
 
 export default {
   name: "HomeView",
   data() {
-    return {};
+    return {
+      awaitingList: '',
+    }
   },
-  async beforeMount() {},
+  async beforeMount() {
+    const ordersList = await service.getOrders();
+    this.awaitingList = ordersList.data;
+  },
   components: {
     NavbarRestorer,
   },
@@ -32,13 +40,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.cards {
-  display: flex;
-}
-
-.card {
-  border: 1px solid black;
-  margin: 5px;
-  padding: 10px;
-}
 </style>

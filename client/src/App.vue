@@ -62,13 +62,17 @@ nav a.router-link-exact-active {
       width: 100px;
     }
 
-    h1, h3 {
+    h1, h3, h4 {
       margin: 0;
-      text-align: right;
+      margin-top: 10px;
     }
 
     p {
       font-weight: bold;
+    }
+
+    button {
+      margin-top: 10px;
     }
   }
 }

@@ -75,10 +75,6 @@ export async function order() {
 
 ////////////////
 // Restorer part
-export async function getMyDishesList() {
-  console.log("");
-}
-
 export async function modifyDish(restaurantId, dishId, newName, newPrice) {
   try {
     const modifyDish = await axios.put(distAddress + '/modify/', {
@@ -89,7 +85,7 @@ export async function modifyDish(restaurantId, dishId, newName, newPrice) {
         price: newPrice,
       }
     })
-    const datas = modifyDish.data.data;
+    const datas = modifyDish.data;
     return datas;
   } catch (err) {
     console.log(err);
@@ -113,4 +109,41 @@ export async function addDish(restaurantId, dishName, dishDescription, dishPrice
     console.log(e)
   }
   return;
+}
+
+export async function getOrders() {
+  try {
+    const response = await axios.get(distAddress + '/orders/')
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function modifyEmail(userId, newMail) {
+  try {
+    const response = await axios.put(distAddress + '/modifyemail/', {
+      data: {
+        id: userId,
+        email: newMail,
+      }
+    })
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function modifyPassword(userId, newPwd) {
+  try {
+    const response = await axios.put(distAddress + '/modifypwd/', {
+      data: {
+        id: userId,
+        password: newPwd,
+      }
+    })
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
 }

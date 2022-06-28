@@ -39,7 +39,7 @@
           </div>
           <div class="sections">
             <h4>{{ dish.price }} €</h4>
-            <input v-if="modifyMode" v-model="newPrice" type="text" placeholder="Nouveau prix (en  €)">
+            <input v-if="modifyMode" v-model="newPrice" type="number" placeholder="Nouveau prix (en  €)">
           </div>
           
           <button v-if="modifyMode" v-on:click="validateModify(dish.id)">Valider les modifications</button>

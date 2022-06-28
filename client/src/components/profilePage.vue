@@ -5,15 +5,19 @@
     <div class="card">
       <div class="modify_email">
         <span>Modifier adresse email</span>
-        <input type="text" placeholder="Entrez nouvelle adresse email" />
-        <button>Confirmer</button>
+        <p>{{this.newMail}}</p>
+        <input type="text" v-model="newMail" placeholder="Entrez nouvelle adresse email" />
+        <button v-on:click="modifyEmail()">Confirmer</button>
       </div>
+    </div>
 
+    <div class="card">
       <div class="modify_password">
         <span>Modifier mot de passe</span>
-        <input type="text" placeholder="Entrez le nouveau mot de passe" />
-        <input type="text" placeholder="Confirmez le nouveau mot de passe" />
-        <button>Confirmer</button>
+        <input type="text" v-model="newPwd" placeholder="Entrez le nouveau mot de passe" />
+        <input type="text" v-model="newPwdBis" placeholder="Confirmez le nouveau mot de passe" />
+        <span v-if="this.isError">Les 2 champs ne correspondent pas</span>
+        <button v-on:click="modifyPassword()">Confirmer</button>
       </div>
     </div>
 
@@ -31,13 +35,43 @@
 </template>
 
 <script>
+const service = require("../../service");
+
 export default {
   name: "profilManageAccount",
   data() {
     return {
-      UserType: false, // If the user is a Client or the deliveryMan: TRUE, else: FALSE
+      UserType: true, // If the user is a Client or the deliveryMan: TRUE, else: FALSE
+      newMail: null,
+      newPwd: null,
+      newPwdBis: null,
+      isError: null,
     };
   },
+  methods: {
+    async modifyEmail() {
+      try {
+        const res = await service.modifyEmail('1', this.newMail);
+        console.log(res);
+      } catch (e) {
+        console.log(e)
+      }
+    },
+    async modifyPassword() {
+      if (this.newPwd === this.newPwdBis) {
+        this.isError = false;
+        try {
+          const res = await service.modifyPassword('1', this.newMail);
+          console.log(res);
+        } catch (e) {
+          console.log(e)
+      }
+      } else {
+        this.isError = true;
+        return 0;
+      }
+    }
+  }
 };
 </script>
 

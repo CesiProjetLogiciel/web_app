@@ -10,6 +10,10 @@ router.put('/modify', controller.modifyDish)
 
 router.post('/add', controller.addDish) 
 
-/*router.delete('/:productID', deleteProduct)*/
+router.get('/orders', controller.getOrders)
+
+router.put('/modifyemail', controller.modifyEmail)
+
+router.put('/modifypwd', controller.modifyPassword)
 
 module.exports = router;

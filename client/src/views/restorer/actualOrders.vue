@@ -2,14 +2,21 @@
   <div>
     <NavbarRestorer />
     <h1>Commandes en cours:</h1>
-    <div class="cards dishes_categorie">
-      <div class="card dish">
-        <img src="../../assets/logo.png" alt="dish" />
-        <h3 class="dish_name">Nom du plat</h3>
-        <h3>Prix</h3>
-        <h6 class="description">Description détaillée du plat rédigée par le restaurateur</h6>
+    <div class="cards pending_orders">
+      <h1>- En attente de validation -</h1>
+
+      <div v-for="order in awaitingList.data" :key="order.id" class="card">
+        <h4>Numéro de la commande : {{ order.id }}</h4>
+        <h4>Articles commandés : {{ order.product_ids }}</h4>
+        <h4>Prix total de la commande : {{ order.price }} €</h4>
+        <h4>Livreur :{{ order.deliveryman_id }}</h4>
       </div>
-      
+    </div>
+
+    <div class="cards accepted_orders">
+      <h1>- En préparation -</h1>
+      <div class="card">
+      </div>
     </div>
   </div>
 </template>
@@ -23,12 +30,15 @@ export default {
   name: "HomeView",
   data() {
     return {
-      dishesList: "",
+      awaitingList: '',
+      acceptedList: '',
     }
   },
   async beforeMount() {
-    const listDishes = await service.getMyDishesList(/* restaurantName parameter */);
-    this.dishesList = listDishes;
+    const ordersList = await service.getOrders();
+    this.awaitingList = ordersList.data;
+    //console.log(this.awaitingList.data)
+    //this.acceptedList = await service.;
   },
   components: {
     NavbarRestorer,
@@ -37,13 +47,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.cards {
-  display: flex;
-}
-
-.card {
-  border: 1px solid black;
-  margin: 5px;
-  padding: 10px;
-}
 </style>
