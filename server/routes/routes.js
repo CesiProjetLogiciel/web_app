@@ -13,10 +13,16 @@ router.post('/restaurants', controller.createRestaurant)
 
 router.get('/dishes', controller.getDishesList)
 
-/* router.post('/', createProduct) 
+router.put('/modify', controller.modifyDish) 
 
-router.put('/:productID', updateProduct) 
+router.post('/add', controller.addDish) 
 
-router.delete('/:productID', deleteProduct)*/
+router.get('/orders', controller.getOrders)
+
+router.put('/modifyemail', controller.modifyEmail)
+
+router.put('/modifypwd', controller.modifyPassword)
+
+router.post('/clientorder', controller.order)
 
 module.exports = router;

@@ -13,6 +13,8 @@ import BasketClient from '../views/clientsPart/cart.vue'
 
 // Restorer parts
 import RestorerHomePage from '../views/restorer/homeRestorer.vue'
+import RestorerOrderPage from '../views/restorer/oldOrders.vue'
+import RestorerActualOrders from '../views/restorer/actualOrders.vue'
 
 //DeliveryMan parts
 import homeDeliveryMan from '../views/deliveryMan/homeDeliveryMan.vue'
@@ -68,7 +70,17 @@ const routes = [
     name: 'restorerHomePage',
     component: RestorerHomePage
   },
-  { // Restorer's Homepage Tab
+  { // Restorer's OLD orders
+    path: '/lastorders',
+    name: 'lastorders',
+    component: RestorerOrderPage
+  },
+  { // Restorer's ACTUAL orders
+    path: '/actualorders',
+    name: 'actualorders',
+    component: RestorerActualOrders
+  },
+  { // Deliverer's Homepage Tab
     path: '/deliveryManHomePage',
     name: 'deliveryManHomePage',
     component: homeDeliveryMan

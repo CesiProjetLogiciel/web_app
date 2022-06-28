@@ -6,16 +6,16 @@
       <router-link to="/ordersClient">Commandes</router-link> |
       <router-link to="/profilePage">Profil</router-link> |
       <router-link to="/basket">Panier</router-link>
-      <p>Restorer</p>
+      <!-- <p>Restorer</p>
+      <router-link to="/actualorders">Commandes actuelles</router-link> |
+      <router-link to="/lastorders">Commandes finies</router-link> |
       <router-link to="/restorerHomePage">Accueil Resto</router-link> |
-      <router-link to="/">Commandes Reçues</router-link> |
-      <router-link to="/profilePage">Profil</router-link> |
-      <router-link to="/parameters">Paramètres</router-link>
+      <router-link to="/profilePage">Profil</router-link>
       <p>DeliveryMan</p>
       <router-link to="/deliveryManHomePage">Accueil Livreur</router-link> |
       <router-link to="/ordersDeliveryMan">Commandes terminées</router-link> |
       <router-link to="/profilePage">Profil</router-link> |
-      <router-link to="/parameters">Paramètres</router-link>
+      <router-link to="/parameters">Paramètres</router-link> -->
     </nav>
 
     <router-view />
@@ -29,14 +29,5 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.navbar_container {
-  background-color: rgb(248, 240, 240);
-  box-shadow: 1px 1px 1px grey;
-  border-radius: 5px;
-  padding: 5px;
 
-  p {
-    margin: 10px;
-  }
-}
 </style>
