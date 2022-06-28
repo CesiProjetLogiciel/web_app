@@ -100,7 +100,11 @@ const modifyPassword = async function (req, res, next) {
     console.log("erreur");
     return e;
   }
-}
+};
+
+const order = async function (req, res, next) {
+  
+};
 
 module.exports = {
   getRestaurantsList,
@@ -110,4 +114,5 @@ module.exports = {
   getOrders,
   modifyEmail,
   modifyPassword,
+  order,
 };

@@ -22,6 +22,15 @@ export const store = new Vuex.Store({
     getters: {
       getProductsId: (state) => (idSearched) => {
         return state.products.find(products => products.id === idSearched)
-      }
+      },
+
+      getTotalPrice: state => {
+        let total = 0;
+        state.products.forEach(product => {
+          total = total + product.productPrice;
+          
+        });
+        return total;
+      },
     },
   })

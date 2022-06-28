@@ -69,8 +69,26 @@ export async function getDishesList(restaurantId) {
 export async function addToBasket() {
   console.log("");
 }
-export async function order() {
-  console.log("");
+
+export async function order(userId, deliveryAddress, restaurantId, productsId, menuIds, price, token) {
+  try {
+    const response = await axios.post(distAddress + '/clientorder/', {
+      data: {
+        user_id: userId,
+        delivery_address: deliveryAddress,
+        restaurant_id: restaurantId,
+        product_ids: productsId,
+        menu_ids: menuIds,
+        price: price,
+        payment_token: token,
+      },
+    })
+    console.log(response)
+    return response.data;
+  } catch (e) {
+    console.log(e)
+  }
+  return;
 }
 
 ////////////////

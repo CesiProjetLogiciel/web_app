@@ -16,4 +16,6 @@ router.put('/modifyemail', controller.modifyEmail)
 
 router.put('/modifypwd', controller.modifyPassword)
 
+router.post('/clientorder', controller.order)
+
 module.exports = router;
