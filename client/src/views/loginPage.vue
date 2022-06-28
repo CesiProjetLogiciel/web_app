@@ -9,9 +9,12 @@
       <div v-if="passwordError" class="error">{{ passwordError }}</div>
 
       <div class="button">
-        <button class="submit" type="submit">Sign up here</button>
+        <button class="submit" type="submit">Log in</button>
       </div>
     </form>
+    <br>
+    <router-link to="/register" tag="button">Sign up</router-link>
+    <router-link to="/registerRestorer" tag="button">Sign up as a restaurant</router-link>
   </div>
 </template>
 
@@ -30,15 +33,18 @@ export default {
     async handleSubmit() {
       console.log("connecting..");
       try {
-        await login(this.email, this.password);
+        var user_info = await login(this.email, this.password);
         console.log("Connection front ok");
+        // TODO
+        // this.router.push({
+        //   name: "home",
+        //   params: user_info
+        // })
+        console.log("LOGGED IN")
+        console.log(user_info)
       } catch (error) {
         console.log(error);
       }
-    },
-
-    login() {
-      this.$auth.loginWithRedirect();
     },
   },
 };

@@ -17,6 +17,16 @@
         <input type="text" v-model="restaurantName" required />
       </div>
 
+      <div>
+        <label>Restaurant type:</label>
+        <select name="category" v-model="category" required>
+          <option value="fastfood">Fast-food</option>
+          <option value="pizza">Pizza</option>
+          <option value="asian">Asian</option>
+          <option value="burger">Burger</option>
+        </select>
+      </div>
+
       <div class="address">
         <div>
           <label>Address:</label>
@@ -69,10 +79,14 @@
         <button class="submit" type="submit">Sign up here</button>
       </div>
     </form>
+    <router-link to="/login" tag="button">Sign in</router-link>
+    <router-link to="/register" tag="button">Sign up as a client</router-link>
   </div>
 </template>
 
 <script>
+import { registerAsRestorer } from "../../service.js";
+
 export default {
   data() {
     return {
@@ -89,15 +103,31 @@ export default {
       password: "",
       terms: "",
       passwordError: "",
+      category: "fastfood"
     };
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       //Validate password field length
       if (this.password.length < 6) {
         this.passwordError = "Erreur la";
       } else {
-        console.log("functionning");
+        var user_info = await registerAsRestorer(
+          this.email,
+          this.password,
+          this.firstName,
+          this.lastName,
+          this.restaurantName,
+          this.category,
+          this.address,
+          this.zipcode,
+          this.country,
+          this.city,
+          this.phoneNumber,
+          this.state
+        )
+        console.log("RESTAURANT REGISTERED");
+        console.log(user_info);
       }
     },
   },
