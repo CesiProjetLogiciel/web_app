@@ -25,7 +25,8 @@ const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeClient
+    component: HomeClient,
+    props: true
   },
   { // Register page for the client
     path: '/register',

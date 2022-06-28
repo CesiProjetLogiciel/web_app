@@ -1,7 +1,6 @@
 <template>
   <div class="container">
-    <Navbar firstLink="Accueil" sndLink="Commandes" thirdLink="Profil" fourthLink="Paramètres"/>
-    <h1>Register as a restorer</h1>
+    <h1>Register</h1>
     <form @submit.prevent="handleSubmit">
       <div>
         <label>Email :</label>
@@ -25,41 +24,54 @@
       </div>
 
       <div>
+        <label>Referral code:</label>
+        <input type="text" v-model="referralCode" />
+      </div>
+
+      <div>
         <input type="checkbox" v-model="terms" required />
         <label>Please accept terms and conditions</label>
       </div>
 
       <div class="button">
-        <button class="submit" type="submit">Sign up here</button>
+        <button class="submit" type="submit">Sign up</button>
       </div>
     </form>
+    <br>
+    <router-link to="/login" tag="button">Sign in</router-link>
+    <router-link to="/registerRestorer" tag="button">Sign up as a restaurant</router-link>
   </div>
 </template>
 
 <script>
-import Navbar from '../components/navbarClient.vue'
+import { registerAsClient } from "../../service.js";
 
 export default {
-  components: {
-    Navbar,
-  },
   data() {
     return {
       email: "",
       password: "",
       firstName: "",
       lastName: "",
+      referralCode: null,
       passwordError: "",
       terms: "",
     };
   },
   methods: {
-    handleSubmit() {
+    async handleSubmit() {
       //Validate password field length
       if (this.password.length < 6) {
         this.passwordError = "Erreur la";
       } else {
-        console.log("functionning");
+        var user_info = await registerAsClient(this.email, this.password, this.firstName, this.lastName, this.referralCode);
+        // TODO
+        // this.router.push({
+        //   name: "home",
+        //   params: user_info
+        // })
+        console.log("REGISTERED CLIENT");
+        console.log(user_info)
       }
     },
   },
