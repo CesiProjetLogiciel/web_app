@@ -126,6 +126,11 @@ export default {
           this.phoneNumber,
           this.state
         )
+        // TODO
+        // this.router.push({
+        //   name: "home",
+        //   params: user_info
+        // })
         console.log("RESTAURANT REGISTERED");
         console.log(user_info);
       }
