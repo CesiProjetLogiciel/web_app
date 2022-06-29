@@ -27,7 +27,7 @@
   <div id="card">
     <div id="card-content">
       <div id="card-title">
-        <h2>Connexion</h2>
+        <h2>Se connecter</h2>
         <div class="underline-title"></div>
       </div>
 
@@ -41,12 +41,12 @@
         <div v-if="passwordError" class="error">{{ passwordError }}</div>
         <div class="form-border"></div>
 
-        <button id="submit-btn" class="submit" type="submit">Log in</button>
+        <button id="submit-btn" class="submit" type="submit">Connexion</button>
       </form>
 
       <br/>
-      <router-link to="/register" tag="button">Sign up</router-link> |
-      <router-link to="/registerRestorer" tag="button">Sign up as a restaurant</router-link>
+      <router-link to="/register" tag="button">Inscription</router-link> |
+      <router-link to="/registerRestorer" tag="button">S'inscrire comme restaurateur</router-link>
 
     </div>
   </div>
@@ -55,7 +55,6 @@
 
 <script>
 import { login } from "../../service.js";
-
 import { loginInfo } from "../store/index";
 
 export default {
@@ -81,12 +80,14 @@ export default {
         var user_info = await login(this.email, this.password);
         console.log("You are logged in");
         loginInfo.commit('registerInfos', user_info)
-        console.log(this.myUserId);
-        console.log(this.myUserType);
-        /*this.router.push({
-          name: "home",
-          params: user_info
-        })*/
+        if (this.myUserType === "client") {
+          this.$router.push('/homePage');
+        } else if (this.myUserType === "restorer") {
+          this.$router.push('/restorerHomePage');
+        } else {
+          console.log("type is not defined")
+        }
+        
       } catch (error) {
         console.log(error);
       }
@@ -122,7 +123,6 @@ label {
   text-align: center;
 }
 #submit-btn {
-  background: rgb(255, 255, 255);
   border: none;
   border-radius: 21px;
   box-shadow: 0px 1px 8px grey;
@@ -131,13 +131,11 @@ label {
   height: 42.3px;
   margin: 0 auto;
   margin-top: 50px;
-  transition: 0.25s;
+  transition: 0.35s;
   width: 153px;
 }
 #submit-btn:hover {
-  box-shadow: 0px 1px 18px grey;
-  background-color: rgba(204, 255, 194, 0.596);
-  
+  box-shadow: 0px 1px 18px grey;  
 }
 .form {
   align-items: left;
@@ -149,10 +147,11 @@ label {
   width: 100%;
 }
 .form-content {
+  align-items: center;
   background: #fbfbfb;
   border: 1px solid black;
   border-radius: 5px;
   outline: none;
-  padding-top: 14px;
+  padding: 8px;
 }
 </style>
