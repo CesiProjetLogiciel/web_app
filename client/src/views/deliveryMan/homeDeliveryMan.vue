@@ -9,11 +9,9 @@
         <h3>- Commandes en cours -</h3>
               <div v-for="order in actualOrders.data" :key="order.id" class="card">
                 <div v-if="order.status === 'DELIVERED'">
-                  <p>{{order}}</p>
                   <h4>Numéro de la commande : {{ order.id }}</h4>
                   <h4>Addresse de livraison : {{ order.delivery_address }}</h4>
-                  <h4>Prix total de la commande : {{ order.price }} €</h4>
-                  <h4>Livreur : {{ order.deliveryman_id }}</h4>
+                  <h4>Address du restaurant : </h4>
                   <button v-on:click="acceptOrder(order.id)">Prendre en charge la commande</button>
                 </div>
         </div>
