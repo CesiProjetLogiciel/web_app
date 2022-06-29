@@ -10,11 +10,14 @@
         <div v-for='object in getCartList' :key='object.id' class='card'>
           <h4>{{ object.quantity }}x {{ object.productName }}</h4>
           <h5>{{ object.productPrice }} €</h5>
+          <button v-on:click='deleteProduct(object.id)'>Supprimer</button>
         </div>
 
         <div class='card'>
           <h3>Prix total des articles: {{ getPrice }} €</h3>
-          <h3>user id {{ getUserId }} </h3>
+          <select v-model='myDeliveryAdrr'>
+            <option v-for='addr in address' :key='addr.id' :value='addr.id'>{{addr.address}}</option>
+          </select>
           <button v-on:click='order()' class='order_button'>Commander</button>
         </div>
       </div>
@@ -46,17 +49,22 @@ export default {
   data() {
     return {
       totalPrice: 0,
+      address: '',
+      myDeliveryAdrr: '',
       };
     },
   components: {
     NavbarClient,
   },
   async beforeMount() {
+    const deliveryAddress = await service.getDeliveryAddress(this.getUserId);
+    this.address = deliveryAddress.data;
   },
   methods: {
-    async order() {
-      let orderPrice = this.getPrice
+    async order() { // The big one
+      const orderPrice = this.getPrice
       const userId = loginInfo.state.userID;
+      //const billingAddress = await service.getBillingAddress();
       try {
         const response = await service.order(userId, 'adresse', 'restaurantId', store.state.products, 'menu_ids', orderPrice);
         console.log(response);
@@ -65,6 +73,10 @@ export default {
         return e;
       }
     },
+    async deleteProduct(idProduct) {
+      var payload = idProduct
+      store.commit('deleteProduct', payload);
+    }
   },
 };
 </script>

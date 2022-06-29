@@ -141,6 +141,20 @@ const order = async function (req, res, next) {
   }
 };
 
+const getDeliveryAddress = async function (req, res, next) {
+  console.log(req.query.user_id)
+  try {
+    const response = await apiCallGet(
+      req,
+      "/users/" + req.query.user_id + "/addresses"
+    );
+    res.send(response.data)
+    return response.data;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
 module.exports = {
   createAddress,
   createRestaurant,
@@ -152,4 +166,5 @@ module.exports = {
   modifyEmail,
   modifyPassword,
   order,
+  getDeliveryAddress,
 };

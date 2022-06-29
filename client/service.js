@@ -149,10 +149,6 @@ export async function getRestaurantsList() {
 export async function getDishesList(restaurantId) {
   try {
     const dishesList = await axios.get(distAddress + '/dishes/', {
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
       params: {
         id: restaurantId
       }
@@ -261,6 +257,19 @@ export async function modifyPassword(userId, newPwd) {
       }
     })
     return response;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function getDeliveryAddress(userId) {
+  try {
+    const response = await axios.get(distAddress + '/getDeliveryAddress/', {
+      params: {
+        user_id: userId
+      }
+    })
+    return response.data;
   } catch (e) {
     console.log(e);
   }

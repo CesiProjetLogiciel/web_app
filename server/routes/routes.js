@@ -25,4 +25,6 @@ router.put('/modifypwd', controller.modifyPassword)
 
 router.post('/clientorder', controller.order)
 
+router.get('/getDeliveryAddress', controller.getDeliveryAddress)
+
 module.exports = router;
