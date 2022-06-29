@@ -11,7 +11,7 @@
           <h4>Articles commandés : {{ order.product_ids }}</h4>
           <h4>Prix total de la commande : {{ order.price }} €</h4>
           <h4>Livreur :{{ order.deliveryman_id }}</h4>
-          <button v-on:click="acceptOrder()">Accepter</button>
+          <button v-on:click="acceptOrder(order.id)">Accepter</button>
           <button v-on:click="declineOrder()">Refuser</button>
         </div>
       </div>
@@ -52,6 +52,16 @@ export default {
   components: {
     NavbarRestorer,
   },
+  methods: {
+    async acceptOrder(orderId) {
+      try {
+        const response = await service.restorerAcceptOrder(orderId)
+        console.log(response); 
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
 };
 </script>
 

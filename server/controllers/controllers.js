@@ -155,7 +155,7 @@ const getDeliveryAddress = async function (req, res, next) {
   }
 };
 const acceptOrder = async function (req, res, next) {
-  const orderId = req.body.data.id  
+  const orderId = req.body.data.id;
   try {
     const response = await apiCallPut(req, '/orders/' + orderId, {
       data: {
@@ -170,7 +170,23 @@ const acceptOrder = async function (req, res, next) {
     console.log(e);
     return e;
   }
-}
+};
+
+const restorerAcceptOrder = async function (req, res, next) {
+  const orderId = req.body.data.orderID;
+  try {
+    const response = await apiCallPut(req, '/orders/' + orderId, {
+        data: {
+          status: 'PREPARING'
+        }
+      })
+    console.log(response.data);
+    res.send(response.data);
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+};
 
 module.exports = {
   createAddress,
@@ -185,4 +201,5 @@ module.exports = {
   order,
   getDeliveryAddress,
   acceptOrder,
+  restorerAcceptOrder,
 };

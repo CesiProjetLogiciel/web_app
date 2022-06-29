@@ -314,3 +314,16 @@ export async function acceptOrder(orderId, deliveryManId) {
     console.log(e);
   }
 }
+
+export async function restorerAcceptOrder(orderId) {
+  try {
+    const response = await axios.put(distAddress, + "/restoreracceptorder/", {
+      data: {
+        orderID: orderId,
+      }
+    });
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+}

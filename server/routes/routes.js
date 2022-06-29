@@ -29,4 +29,6 @@ router.get('/getDeliveryAddress', controller.getDeliveryAddress)
 
 router.put('/acceptorder', controller.acceptOrder)
 
+router.put('restoreracceptorder', controller.restorerAcceptOrder)
+
 module.exports = router;
