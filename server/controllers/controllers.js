@@ -141,6 +141,24 @@ const order = async function (req, res, next) {
   }
 };
 
+const acceptOrder = async function (req, res, next) {
+  const orderId = req.body.data.id  
+  try {
+    const response = await apiCallPut(req, '/orders/' + orderId, {
+      data: {
+        deliveryman_id: req.body.data.deliveryman_id
+      }
+    })
+    console.log(response.data)
+    res.send(response.data)
+    return response
+  }
+  catch (e) {
+    console.log(e);
+    return e;
+  }
+}
+
 module.exports = {
   createAddress,
   createRestaurant,
@@ -152,4 +170,5 @@ module.exports = {
   modifyEmail,
   modifyPassword,
   order,
+  acceptOrder
 };

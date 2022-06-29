@@ -6,48 +6,16 @@
     </div>
     <div class="body">
       <div class="cards">
-        <div class="card">
-          <h2>Client Name</h2>
-          <p>Distance restaurant - client</p>
-          <p>Addresse Client</p>
-          <p>Adresse Restaurant</p>
-          <p>Rénumération:</p>
-          <button>Prise en charge</button>
-          <button>Commande récupérée</button>
-          <button>Commande livrée</button>
-        </div>
-
-        <div class="card">
-          <h2>Client Name</h2>
-          <p>Distance restaurant - client</p>
-          <p>Addresse Client</p>
-          <p>Adresse Restaurant</p>
-          <p>Rénumération:</p>
-          <button>Prise en charge</button>
-          <button>Commande récupérée</button>
-          <button>Commande livrée</button>
-        </div>
-
-        <div class="card">
-          <h2>Client Name</h2>
-          <p>Distance restaurant - client</p>
-          <p>Addresse Client</p>
-          <p>Adresse Restaurant</p>
-          <p>Rénumération:</p>
-          <button>Prise en charge</button>
-          <button>Commande récupérée</button>
-          <button>Commande livrée</button>
-        </div>
-
-        <div class="card">
-          <h2>Client Name</h2>
-          <p>Distance restaurant - client</p>
-          <p>Addresse Client</p>
-          <p>Adresse Restaurant</p>
-          <p>Rénumération:</p>
-          <button>Prise en charge</button>
-          <button>Commande récupérée</button>
-          <button>Commande livrée</button>
+        <h3>- Commandes en cours -</h3>
+              <div v-for="order in actualOrders.data" :key="order.id" class="card">
+                <div v-if="order.status === 'DELIVERED'">
+                  <p>{{order}}</p>
+                  <h4>Numéro de la commande : {{ order.id }}</h4>
+                  <h4>Addresse de livraison : {{ order.delivery_address }}</h4>
+                  <h4>Prix total de la commande : {{ order.price }} €</h4>
+                  <h4>Livreur : {{ order.deliveryman_id }}</h4>
+                  <button v-on:click="acceptOrder(order.id)">Prendre en charge la commande</button>
+                </div>
         </div>
       </div>
     </div>  
@@ -57,31 +25,39 @@
 <script>
 // @ is an alias to /src
 import NavBar from "../../components/navbarClient.vue";
+import { loginInfo } from "../../store/index";
+
+const service = require("../../../service");
 
 export default {
   name: 'deliveryManHomePage',
   components: {
     NavBar
+  },
+  data() {
+    return {
+      actualOrders: '',
+    }
+  },
+  computed: {
+    myUserId() { // Allows to know the state of the cart
+      return loginInfo.state.userID;
+    },
+  },
+  async beforeMount() {
+    const ordersList = await service.getOrders();
+    this.actualOrders = ordersList.data;
+  },
+  methods: {
+    async acceptOrder(id) {
+      const userId = loginInfo.state.userID
+  try {
+    const response = await service.acceptOrder(id, userId)
+    console.log(response)
+  }  catch (e){
+    console.log(e)
   }
+    },
+  },
 }
 </script>
-
-<style lang="scss" scoped>
-.cards {
-  border: 1px solid red;
-  box-shadow: 1px 1px 1px black;
-  display: flex;
-  width: 99%;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.card {
-  border: 1px solid blue;
-  margin: 2px;
-  width: 48%;
-  img {
-    width: 100px;
-  }
-}
-</style>

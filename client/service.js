@@ -265,3 +265,18 @@ export async function modifyPassword(userId, newPwd) {
     console.log(e);
   }
 }
+
+export async function acceptOrder(orderId, deliveryManId) {
+  try {
+    const response = await axios.put(distAddress + '/acceptorder/', {
+      data: {
+        id: orderId,
+        deliveryman_id: deliveryManId
+      }
+    })
+    return response;
+  }
+  catch (e) {
+    console.log(e);
+  }
+}
