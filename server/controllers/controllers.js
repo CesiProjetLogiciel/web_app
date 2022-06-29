@@ -23,14 +23,6 @@ const createRestaurant = async function (req, res, next) {
     }
 }
 
-/*const getRestaurantsListBis = async function (req, res, next) {
-  let response = await axios.get(APIPrefix + "/api/restaurants/", {
-    headers: { Authorization: "Bearer " },
-  });
-  res.send(response.data);
-  return response;
-};*/
-
 const getRestaurantsList = async function (req, res, next) {
   try {
     let response = await apiCallGet(req, "/restaurants/");
@@ -128,7 +120,25 @@ const modifyPassword = async function (req, res, next) {
 };
 
 const order = async function (req, res, next) {
-  
+  try {
+    const response = await apiCallPost(
+      req,
+      '/orders',
+      {data: {
+        user_id: req.body.data.uder_id,
+        delivery_address: req.body.data.delivery_address,
+        restaurant_id: req.body.data.restaurant_id,
+        product_ids: req.body.data.product_ids,
+        menu_ids: req.body.data.menu_ids,
+        price: req.body.data.price,
+        payment_token: 'ejp9WgIVINlBL1QAl7AUDx36p',
+      }}
+    )
+    console.log(response)
+  } catch (e) {
+    console.log(e);
+    return e;
+  }
 };
 
 module.exports = {

@@ -1,31 +1,31 @@
 <template>
   <div class="container">
-    <h1>Register</h1>
+    <h1>Inscription</h1>
     <form @submit.prevent="handleSubmit">
       <div>
-        <label>Email :</label>
+        <label>Email : </label>
         <input type="email" v-model="email" required />
       </div>
 
       <div>
-        <label>Password :</label>
+        <label>Mot de passe : </label>
         <input type="password" v-model="password" required />
         <div v-if="passwordError" class="error">{{ passwordError }}</div>
       </div>
 
       <div>
-        <label>First name:</label>
+        <label>Prénom : </label>
         <input type="text" v-model="firstName" required />
       </div>
 
       <div>
-        <label>Last name:</label>
+        <label>Nom : </label>
         <input type="text" v-model="lastName" required />
       </div>
 
       <div>
-        <label>Referral code:</label>
-        <input type="text" v-model="referralCode" />
+        <label>Code parrainage : </label>
+        <input type="text" v-model="referralCode" placeholder="Optionnel" />
       </div>
 
       <div>
@@ -34,12 +34,12 @@
       </div>
 
       <div class="button">
-        <button class="submit" type="submit">Sign up</button>
+        <button class="submit" type="submit">S'inscrire</button>
       </div>
     </form>
     <br>
-    <router-link to="/login" tag="button">Sign in</router-link>
-    <router-link to="/registerRestorer" tag="button">Sign up as a restaurant</router-link>
+    <router-link to="/login" tag="button">Connexion</router-link> |
+    <router-link to="/registerRestorer" tag="button">S'inscrire comme restaurateur</router-link>
   </div>
 </template>
 
@@ -60,18 +60,17 @@ export default {
   },
   methods: {
     async handleSubmit() {
-      //Validate password field length
-      if (this.password.length < 6) {
-        this.passwordError = "Erreur la";
+      if (this.password.length > 6) {
+        try {
+          await registerAsClient(this.email, this.password, this.firstName, this.lastName, this.referralCode);
+          console.log("REGISTERED CLIENT");
+          this.router.push('/homePage')
+        } catch (e) {
+          this.passwordError = "Il y a eu un problème"
+        }
+        
       } else {
-        var user_info = await registerAsClient(this.email, this.password, this.firstName, this.lastName, this.referralCode);
-        // TODO
-        // this.router.push({
-        //   name: "home",
-        //   params: user_info
-        // })
-        console.log("REGISTERED CLIENT");
-        console.log(user_info)
+        this.passwordError = "Erreur la";
       }
     },
   },
@@ -79,6 +78,11 @@ export default {
 </script>
 
 <style scoped>
+.container {
+  width: 400px;
+  height: 900px;
+  margin: auto;
+}
 form {
   max-width: 600px;
   margin: 30px auto;
@@ -86,5 +90,10 @@ form {
   text-align: left;
   padding: 20px;
   border-radius: 10px;
+  margin: auto;
+}
+div {
+  padding-top: 10px;
+  margin: auto;
 }
 </style>

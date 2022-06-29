@@ -3,22 +3,22 @@
     <h1>Register as a restorer</h1>
     <form @submit.prevent="handleSubmit">
       <div>
-        <label>First name:</label>
+        <label>Prénom : </label>
         <input type="text" v-model="firstName" required />
       </div>
 
       <div>
-        <label>Last name:</label>
+        <label>Nom : </label>
         <input type="text" v-model="lastName" required />
       </div>
 
       <div>
-        <label>Restaurant name:</label>
+        <label>Nom du restaurant : </label>
         <input type="text" v-model="restaurantName" required />
       </div>
 
       <div>
-        <label>Restaurant type:</label>
+        <label>Type de restaurant : </label>
         <select name="category" v-model="category" required>
           <option value="fastfood">Fast-food</option>
           <option value="pizza">Pizza</option>
@@ -29,58 +29,58 @@
 
       <div class="address">
         <div>
-          <label>Address:</label>
+          <label>Adresse : </label>
           <input type="text" v-model="address" required />
         </div>
 
         <div>
-          <label>Zipcode:</label>
+          <label>Code postal : </label>
           <input type="text" v-model="zipcode" required />
         </div>
 
         <div>
-          <label>Country</label>
+          <label>Pays : </label>
           <input type="text" v-model="country" required />
         </div>
 
         <div>
-          <label>City:</label>
+          <label>Ville : </label>
           <input type="text" v-model="city" required />
         </div>
 
         <div>
-          <label>State:</label>
+          <label>Etat / province : </label>
           <input type="text" v-model="state" required />
         </div>
       </div>
 
       <div>
-        <label>Phone number :</label>
+        <label>Numéro de téléphone :</label>
         <input type="text" v-model="phoneNumber" required />
       </div>
 
       <div>
-        <label>Email :</label>
+        <label>Adresse email : </label>
         <input type="email" v-model="email" required />
       </div>
 
       <div>
-        <label>Password :</label>
+        <label>Mot de passe : </label>
         <input type="password" v-model="password" required />
         <div v-if="passwordError" class="error">{{ passwordError }}</div>
       </div>
 
       <div>
         <input type="checkbox" v-model="terms" required />
-        <label>Please accept terms and conditions</label>
+        <label>Veuillez accepter les termes et conditions d'inscription</label>
       </div>
 
       <div class="button">
-        <button class="submit" type="submit">Sign up here</button>
+        <button class="submit" type="submit">Envoyer l'inscription</button>
       </div>
     </form>
-    <router-link to="/login" tag="button">Sign in</router-link>
-    <router-link to="/register" tag="button">Sign up as a client</router-link>
+    <router-link to="/login" tag="button">Se connecter</router-link> |
+    <router-link to="/register" tag="button">S'inscrire comme client</router-link>
   </div>
 </template>
 
@@ -126,11 +126,9 @@ export default {
           this.phoneNumber,
           this.state
         )
-        // TODO
-        // this.router.push({
-        //   name: "home",
-        //   params: user_info
-        // })
+        this.$confirm("Votre demande d'inscription à été transmise, vous aurez confirmation de votre inscription très bientôt").then(() => {
+          this.$router.push('/login');
+        });
         console.log("RESTAURANT REGISTERED");
         console.log(user_info);
       }
@@ -148,5 +146,8 @@ form,
   text-align: left;
   padding: 20px;
   border-radius: 10px;
+}
+div {
+  padding-top: 8px;
 }
 </style>

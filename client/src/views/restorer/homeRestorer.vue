@@ -30,7 +30,7 @@
       <div v-if="!createMode" class="cards">
         <div class="card" v-for="dish in dishesList" :key="dish.id">
           <div class="sections">
-            <h1>{{ dish.name }}</h1>
+            <h1>{{ dish.namer }}</h1>
             <input v-if="modifyMode" v-model="newName" type="text" placeholder="Nouveau nom">
           </div>
           <div class="sections">
@@ -51,6 +51,7 @@
 
 <script>
 import NavbarRestorer from "../../components/navbarClient.vue";
+import { loginInfo } from "../../store/index";
 
 const service = require("../../../service");
 
@@ -72,7 +73,8 @@ export default {
     }
   },
   async beforeMount() {
-    const listDishes = await service.getDishesList("6");
+    const listDishes = await service.getDishesList(loginInfo.state.userID);
+    console.log(loginInfo.state.userID)
     this.dishesList = listDishes;
   },
   components: {

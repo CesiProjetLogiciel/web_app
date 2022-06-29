@@ -19,7 +19,7 @@
 }
 
 html {
-  background-color: rgba(204, 255, 194, 0.596);
+  background-color: rgba(212, 212, 212, 0.596);
 }
 
 nav a {
