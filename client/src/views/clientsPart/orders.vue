@@ -3,28 +3,58 @@
     <NavbarClient />
     <h1>ORDERS</h1>
     <div class="cards">
-      <div class="card order">
-        <h3 class="order_number">Commande n°1235</h3>
-        <h5 class="order_status">Status : accepted by the restorer</h5>
-        <button>Contacter le livreur</button>
-        <button>Aide/Signaler un problème</button>
+
+      <h3>- Commande en cours -</h3>
+      <div v-for="order in oldOrders.data" :key="order.user_id" class="card">
+        <div v-if="order.status === 'DELIVERED' && order.user_id === myUserId">
+          <h4>Numéro de la commande : {{ order.id }}</h4>
+          <h4>Articles commandés : {{ order.product_ids }}</h4>
+          <h4>Prix total de la commande : {{ order.price }} €</h4>
+          <h4>Livreur : {{ order.deliveryman_id }}</h4>
+          <button v-on:click="acceptOrder()">Aide/Signaler un problème</button>
+        </div>
+        <div v-else>
+          <h3>Aucune commande en cours</h3>
+        </div>
       </div>
 
-      <div class="card order">
-        <h3 class="order_number">Commande n°1234</h3>
-        <h5 class="order_status">Status : ended</h5>
-        <button>Aide/Signaler un problème</button>
-        <button>Supprimer de l'historique</button>
+      <h3>- Anciennes commandes -</h3>
+      <div v-for="order in oldOrders.data" :key="order.id" class="card">
+        <div v-if="order.status === 'DELIVERED'">
+          <h4>Numéro de la commande : {{ order.id }}</h4>
+          <h4>Articles commandés : {{ order.product_ids }}</h4>
+          <h4>Prix total de la commande : {{ order.price }} €</h4>
+          <h4>Livreur : {{ order.deliveryman_id }}</h4>
+          <button v-on:click="acceptOrder()">Aide/Signaler un problème</button>
+        </div>
       </div>
+
     </div>
   </div>
 </template>
 
 <script>
 import NavbarClient from "../../components/navbarClient.vue";
+import { loginInfo } from "../../store/index";
+
+const service = require("../../../service");
 
 export default {
   name: "OrdersClient",
+  data() {
+    return {
+      oldOrders: '',
+    }
+  },
+  computed: {
+    myUserId() { // Allows to know the state of the cart
+      return loginInfo.state.userID;
+    },
+  },
+  async beforeMount() {
+    const ordersList = await service.getOrders();
+    this.oldOrders = ordersList.data;
+  },
   components: {
     NavbarClient,
   },

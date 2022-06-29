@@ -93,7 +93,6 @@ const apiCallGet = async function (req, route) {
 
 const apiCallPost = async function (req, route, body) {
     console.log("POST")
-    console.log(req.session)
     let response = await apiCall(req, "post", route, req.session.access_token, body);
     return response;
 }

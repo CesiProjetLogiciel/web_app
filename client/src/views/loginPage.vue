@@ -1,28 +1,4 @@
 <template>
-<!--  <div class="cards">
-    <div class="card">
-      <h1>Connexion</h1>
-      <form @submit.prevent="handleSubmit">
-        <div class="email_section">
-          <label>Email :</label>
-          <input type="email" v-model="email" required />
-        </div>
-
-        <div class="password_section">
-          <label>Password :</label>
-          <input type="password" v-model="password" required />
-          <div v-if="passwordError" class="error">{{ passwordError }}</div>
-        </div>
-
-        <div class="button">
-          <button class="submit" type="submit">Log in</button>
-        </div>
-
-      </form>
-      <router-link to="/register" tag="button">Sign up</router-link>
-      <router-link to="/registerRestorer" tag="button">Sign up as a restaurant</router-link>
-    </div>
-  </div> -->
  <body>
   <div id="card">
     <div id="card-content">
@@ -110,7 +86,7 @@ label {
   box-shadow: 1px 2px 8px grey;
   height: 410px;
   margin: 6rem auto 8.1rem auto;
-  width: 329px;
+  width: 400px;
 }
 #card-content {
   padding: 12px 44px;

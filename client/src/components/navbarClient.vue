@@ -6,7 +6,7 @@
       <router-link to="/ordersClient">Commandes</router-link> |
       <router-link to="/profilePage">Profil</router-link> |
       <router-link to="/basket">Panier</router-link>
-      <!-- <p>Restorer</p>
+      <p>Restorer</p>
       <router-link to="/actualorders">Commandes actuelles</router-link> |
       <router-link to="/lastorders">Commandes finies</router-link> |
       <router-link to="/restorerHomePage">Accueil Resto</router-link> |
@@ -15,7 +15,7 @@
       <router-link to="/deliveryManHomePage">Accueil Livreur</router-link> |
       <router-link to="/ordersDeliveryMan">Commandes terminées</router-link> |
       <router-link to="/profilePage">Profil</router-link> |
-      <router-link to="/parameters">Paramètres</router-link> -->
+      <router-link to="/parameters">Paramètres</router-link>
     </nav>
 
     <router-view />
@@ -36,7 +36,7 @@ export default {
   padding: 5px;
 
   a.router-link {
-    color: blue;
+    color: black;
   }
 }
 </style>

@@ -169,7 +169,7 @@ export async function addToBasket() {
   console.log("");
 }
 
-export async function order(userId, deliveryAddress, restaurantId, productsId, menuIds, price, token) {
+export async function order(userId, deliveryAddress, restaurantId, productsId, menuIds, price) {
   try {
     const response = await axios.post(distAddress + '/clientorder/', {
       data: {
@@ -179,10 +179,10 @@ export async function order(userId, deliveryAddress, restaurantId, productsId, m
         product_ids: productsId,
         menu_ids: menuIds,
         price: price,
-        payment_token: token,
+        payment_token: 'token_payment',
       },
     })
-    console.log(response)
+    console.log(response.data)
     return response.data;
   } catch (e) {
     console.log(e)
