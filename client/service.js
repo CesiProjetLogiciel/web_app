@@ -3,8 +3,6 @@ axios.defaults.withCredentials = true;
 
 // file used to link send request on the server side
 export async function login(email, password) {
-  console.log("service.js reached");
-
   try {
     const response = await axios({
       method: "post",
@@ -18,7 +16,6 @@ export async function login(email, password) {
         password: password,
       }
     });
-    console.log(response.data);
     return response.data;
   } catch (error) {
     console.log(error);

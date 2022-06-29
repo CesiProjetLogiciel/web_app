@@ -34,3 +34,18 @@ export const store = new Vuex.Store({
       },
     },
   })
+
+  export const loginInfo = new Vuex.Store({
+    state: {
+      userID: "",
+      userTYPE: "",
+    },
+    mutations: {
+      registerInfos (state, payload) {
+        const myId = payload['user_id'];
+        const myRights = payload['user_type'];
+        state.userID = myId;
+        state.userTYPE = myRights;
+      }
+    }
+  })
