@@ -262,6 +262,7 @@ export async function modifyPassword(userId, newPwd) {
   }
 }
 
+<<<<<<< HEAD
 export async function getDeliveryAddress(userId) {
   try {
     const response = await axios.get(distAddress + '/getDeliveryAddress/', {
@@ -271,6 +272,19 @@ export async function getDeliveryAddress(userId) {
     })
     return response.data;
   } catch (e) {
+=======
+export async function acceptOrder(orderId, deliveryManId) {
+  try {
+    const response = await axios.put(distAddress + '/acceptorder/', {
+      data: {
+        id: orderId,
+        deliveryman_id: deliveryManId
+      }
+    })
+    return response;
+  }
+  catch (e) {
+>>>>>>> 1c77443ea6068f8e73fe97aa86ad16cddc363ec6
     console.log(e);
   }
 }

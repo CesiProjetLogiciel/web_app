@@ -141,6 +141,7 @@ const order = async function (req, res, next) {
   }
 };
 
+<<<<<<< HEAD
 const getDeliveryAddress = async function (req, res, next) {
   console.log(req.query.user_id)
   try {
@@ -154,6 +155,25 @@ const getDeliveryAddress = async function (req, res, next) {
     console.log(e);
   }
 };
+=======
+const acceptOrder = async function (req, res, next) {
+  const orderId = req.body.data.id  
+  try {
+    const response = await apiCallPut(req, '/orders/' + orderId, {
+      data: {
+        deliveryman_id: req.body.data.deliveryman_id
+      }
+    })
+    console.log(response.data)
+    res.send(response.data)
+    return response
+  }
+  catch (e) {
+    console.log(e);
+    return e;
+  }
+}
+>>>>>>> 1c77443ea6068f8e73fe97aa86ad16cddc363ec6
 
 module.exports = {
   createAddress,
@@ -166,5 +186,9 @@ module.exports = {
   modifyEmail,
   modifyPassword,
   order,
+<<<<<<< HEAD
   getDeliveryAddress,
+=======
+  acceptOrder
+>>>>>>> 1c77443ea6068f8e73fe97aa86ad16cddc363ec6
 };
