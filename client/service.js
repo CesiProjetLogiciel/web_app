@@ -14,7 +14,7 @@ export async function login(email, password) {
       data: {
         email: email,
         password: password,
-      }
+      },
     });
     return response.data;
   } catch (error) {
@@ -22,7 +22,13 @@ export async function login(email, password) {
   }
 }
 
-export async function registerAsClient(email, password, firstName, lastName, referralCode = null) {
+export async function registerAsClient(
+  email,
+  password,
+  firstName,
+  lastName,
+  referralCode = null
+) {
   console.log("Client registration request");
   try {
     var body = {
@@ -30,8 +36,8 @@ export async function registerAsClient(email, password, firstName, lastName, ref
       password: password,
       first_name: firstName,
       last_name: lastName,
-      user_type: "Client"
-    }
+      user_type: "Client",
+    };
     if (referralCode != null) {
       body.referral_code = referralCode;
     }
@@ -42,7 +48,7 @@ export async function registerAsClient(email, password, firstName, lastName, ref
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      data: body
+      data: body,
     });
     console.log(response.data);
     return response.data;
@@ -64,70 +70,71 @@ export async function registerAsRestorer(
   city,
   phoneNumber,
   state = null,
-  referral_code = null) {
-    try {
-      var body = {
-        email: email,
-        password: password,
-        first_name: firstName,
+  referral_code = null
+) {
+  try {
+    var body = {
+      email: email,
+      password: password,
+      first_name: firstName,
+      last_name: lastName,
+      user_type: "Restaurant",
+    };
+    if (referral_code != null) {
+      body.referral_code = referral_code;
+    }
+    const response = await axios({
+      method: "post",
+      url: "http://localhost:5000/register",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      data: body,
+    });
+
+    if (response.status == 201) {
+      var bodyAddress = {
+        zipcode: zipcode,
+        address: address,
+        city: city,
+        country: country,
         last_name: lastName,
-        user_type: "Restaurant"
+        first_name: firstName,
+        phone_number: phoneNumber,
+      };
+      if (state != null) {
+        bodyAddress.state = state;
       }
-      if (referral_code != null) {
-        body.referral_code = referral_code;
-      }
-      const response = await axios({
+      await axios({
         method: "post",
-        url: "http://localhost:5000/register",
+        url: "http://localhost:5000/addresses",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        data: body
+        data: bodyAddress,
       });
 
-      if (response.status == 201) {
-        var bodyAddress = {
-          zipcode: zipcode,
-          address: address,
-          city: city,
-          country: country,
-          last_name: lastName,
-          first_name: firstName,
-          phone_number: phoneNumber
-        }
-        if (state != null) {
-          bodyAddress.state = state;
-        }
-        await axios({
-          method: "post",
-          url: "http://localhost:5000/addresses",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          data: bodyAddress
-        });
-
-        await axios({
-          method: "post",
-          url: "http://localhost:5000/restaurants",
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-          },
-          data: {
-            name: restaurantName,
-            category: category
-          }
-        });
-      }
-
-      return response.data;
-    } catch (error) {
-      console.log(error);
+      await axios({
+        method: "post",
+        url: "http://localhost:5000/restaurants",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        data: {
+          name: restaurantName,
+          category: category,
+        },
+      });
     }
-    console.log("Restorer registration request");
+
+    return response.data;
+  } catch (error) {
+    console.log(error);
+  }
+  console.log("Restorer registration request");
 }
 
 //////////////
@@ -137,7 +144,7 @@ const distAddress = "http://localhost:5000";
 
 export async function getRestaurantsList() {
   try {
-    const restaurantsList = await axios.get(distAddress + '/restaurants/'); // Mettre en paramètre quels restaurants afficher
+    const restaurantsList = await axios.get(distAddress + "/restaurants/"); // Mettre en paramètre quels restaurants afficher
     const datas = restaurantsList.data.data;
     return datas;
   } catch (err) {
@@ -148,11 +155,11 @@ export async function getRestaurantsList() {
 
 export async function getDishesList(restaurantId) {
   try {
-    const dishesList = await axios.get(distAddress + '/dishes/', {
+    const dishesList = await axios.get(distAddress + "/dishes/", {
       params: {
-        id: restaurantId
-      }
-    }) // Mettre en paramètre quels restaurants afficher
+        id: restaurantId,
+      },
+    }); // Mettre en paramètre quels restaurants afficher
     const datas = dishesList.data.data;
     return datas;
   } catch (err) {
@@ -165,9 +172,16 @@ export async function addToBasket() {
   console.log("");
 }
 
-export async function order(userId, deliveryAddress, restaurantId, productsId, menuIds, price) {
+export async function order(
+  userId,
+  deliveryAddress,
+  restaurantId,
+  productsId,
+  menuIds,
+  price
+) {
   try {
-    const response = await axios.post(distAddress + '/clientorder/', {
+    const response = await axios.post(distAddress + "/clientorder/", {
       data: {
         user_id: userId,
         delivery_address: deliveryAddress,
@@ -175,30 +189,36 @@ export async function order(userId, deliveryAddress, restaurantId, productsId, m
         product_ids: productsId,
         menu_ids: menuIds,
         price: price,
-        payment_token: 'token_payment',
+        payment_token: "token_payment",
       },
-    })
-    console.log(response.data)
+    });
+    console.log(response.data);
     return response.data;
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
   return;
 }
 
 ////////////////
 // Restorer part
-export async function modifyDish(restaurantId, dishId, newName, newDescription, newPrice) {
+export async function modifyDish(
+  restaurantId,
+  dishId,
+  newName,
+  newDescription,
+  newPrice
+) {
   try {
-    const modifyDish = await axios.put(distAddress + '/modify/', {
+    const modifyDish = await axios.put(distAddress + "/modify/", {
       data: {
         id: restaurantId,
         idToModify: dishId,
         name: newName,
         description: newDescription,
         price: newPrice,
-      }
-    })
+      },
+    });
     const datas = modifyDish.data;
     return datas;
   } catch (err) {
@@ -207,27 +227,33 @@ export async function modifyDish(restaurantId, dishId, newName, newDescription, 
   return;
 }
 
-export async function addDish(restaurantId, dishName, dishDescription, dishPrice, dishImage) {
+export async function addDish(
+  restaurantId,
+  dishName,
+  dishDescription,
+  dishPrice,
+  dishImage
+) {
   try {
-    const response = await axios.post(distAddress + '/add/', {
+    const response = await axios.post(distAddress + "/add/", {
       data: {
         id: restaurantId,
         dishName: dishName,
         dishDescription: dishDescription,
         dishPrice: dishPrice,
-        dishPicture: dishImage
+        dishPicture: dishImage,
       },
-    })
+    });
     return response.data;
   } catch (e) {
-    console.log(e)
+    console.log(e);
   }
   return;
 }
 
 export async function getOrders() {
   try {
-    const response = await axios.get(distAddress + '/orders/')
+    const response = await axios.get(distAddress + "/orders/");
     return response;
   } catch (e) {
     console.log(e);
@@ -236,12 +262,12 @@ export async function getOrders() {
 
 export async function modifyEmail(userId, newMail) {
   try {
-    const response = await axios.put(distAddress + '/modifyemail/', {
+    const response = await axios.put(distAddress + "/modifyemail/", {
       data: {
         id: userId,
         email: newMail,
-      }
-    })
+      },
+    });
     return response;
   } catch (e) {
     console.log(e);
@@ -250,41 +276,41 @@ export async function modifyEmail(userId, newMail) {
 
 export async function modifyPassword(userId, newPwd) {
   try {
-    const response = await axios.put(distAddress + '/modifypwd/', {
+    const response = await axios.put(distAddress + "/modifypwd/", {
       data: {
         id: userId,
         password: newPwd,
-      }
-    })
+      },
+    });
     return response;
   } catch (e) {
     console.log(e);
   }
 }
 
-<<<<<<< HEAD
 export async function getDeliveryAddress(userId) {
   try {
-    const response = await axios.get(distAddress + '/getDeliveryAddress/', {
+    const response = await axios.get(distAddress + "/getDeliveryAddress/", {
       params: {
-        user_id: userId
-      }
-    })
+        user_id: userId,
+      },
+    });
     return response.data;
   } catch (e) {
-=======
+    console.log(e);
+  }
+}
+
 export async function acceptOrder(orderId, deliveryManId) {
   try {
-    const response = await axios.put(distAddress + '/acceptorder/', {
+    const response = await axios.put(distAddress + "/acceptorder/", {
       data: {
         id: orderId,
-        deliveryman_id: deliveryManId
-      }
-    })
+        deliveryman_id: deliveryManId,
+      },
+    });
     return response;
-  }
-  catch (e) {
->>>>>>> 1c77443ea6068f8e73fe97aa86ad16cddc363ec6
+  } catch (e) {
     console.log(e);
   }
 }
