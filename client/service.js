@@ -195,13 +195,14 @@ export async function order(userId, deliveryAddress, restaurantId, productsId, m
 
 ////////////////
 // Restorer part
-export async function modifyDish(restaurantId, dishId, newName, newPrice) {
+export async function modifyDish(restaurantId, dishId, newName, newDescription, newPrice) {
   try {
     const modifyDish = await axios.put(distAddress + '/modify/', {
       data: {
         id: restaurantId,
         idToModify: dishId,
         name: newName,
+        description: newDescription,
         price: newPrice,
       }
     })

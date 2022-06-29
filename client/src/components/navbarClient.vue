@@ -29,5 +29,14 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.navbar_container {
+  background-color: rgb(248, 240, 240);
+  box-shadow: 1px 1px 1px grey;
+  border-radius: 5px;
+  padding: 5px;
 
+  a.router-link {
+    color: blue;
+  }
+}
 </style>

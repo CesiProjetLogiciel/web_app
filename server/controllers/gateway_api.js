@@ -32,6 +32,7 @@ async function apiCall(req, method, route, bearerToken, body = null) {
     if (Array.from(route)[0] != "/") {
         route = "/" + route;
     }
+    
     var request = {
         method: method,
         url: `${API_URL}/api${route}`,
@@ -113,5 +114,5 @@ module.exports = {
     apiCallGet,
     apiCallPost,
     apiCallPut,
-    apiCallDelete
-  };
+    apiCallDelete,
+};

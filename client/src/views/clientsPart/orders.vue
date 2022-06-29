@@ -32,11 +32,4 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.card {
-  background-color: rgb(218, 210, 210);
-  box-shadow: 1px 1px 1px grey;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 10px;
-}
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="app">
     <!-- <nav>
       <router-link to="/">Homepage</router-link> |
       <router-link to="/login">Login</router-link> |
@@ -19,27 +19,15 @@
 }
 
 html {
-  background-color: rgb(231, 231, 231);
-}
-
-.navbar_container {
-  background-color: rgb(248, 240, 240);
-  box-shadow: 1px 1px 1px grey;
-  border-radius: 5px;
-  padding: 5px;
-
-  p {
-    margin: 10px;
-  }
+  background-color: rgba(204, 255, 194, 0.596);
 }
 
 nav a {
   font-weight: bold;
-  color: black;
 }
 
 nav a.router-link-exact-active {
-  color: blue;
+  color: rgb(111, 202, 99);
 }
 
 .cards {
@@ -51,11 +39,12 @@ nav a.router-link-exact-active {
 
   .card {
     box-shadow: 0px 0px 4px rgb(85, 85, 85);
+    background-color: white;
     text-align: left;
     padding: 15px;
     border-radius: 5px;
     margin: auto;
-    margin-top: 5px;
+    margin-top: 10px;
     width: 100%;
 
     img {

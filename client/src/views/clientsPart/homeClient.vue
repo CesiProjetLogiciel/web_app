@@ -7,11 +7,8 @@
 
     <div class="body">
       <div v-if="!isRestaurantOpen" class="cards">
-        <div
-          class="card"
-          v-for="restaurant in restaurantsList"
-          :key="restaurant.id"
-        >
+        <div class="card" v-for="restaurant in restaurantsList" :key="restaurant.id">
+          <img :src="getImgUrl(restaurant.image)" alt="restaurant_image">
           <h1>{{ restaurant.name }}</h1>
           <h3>{{ restaurant.category }}</h3>
           <p>"{{ restaurant.description }}"</p>
@@ -31,6 +28,7 @@
             Ajouter au panier
           </button>
         </div>
+
       </div>
     </div>
   </div>
@@ -69,6 +67,10 @@ export default {
       this.isRestaurantOpen = true;
       const listDishes = await service.getDishesList("7");
       this.dishesList = listDishes;
+    },
+    getImgUrl(base64img) {
+      var fullUrl = "data:image/png;base64, " + base64img;
+      return fullUrl;
     },
 
     addToCart(productId, productName, productPrice) {
