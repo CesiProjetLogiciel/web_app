@@ -11,7 +11,6 @@
           <h4>Articles commandés : {{ order.product_ids }}</h4>
           <h4>Prix total de la commande : {{ order.price }} €</h4>
           <h4>Livreur : {{ order.deliveryman_id }}</h4>
-          <button v-on:click="acceptOrder()">Aide/Signaler un problème</button>
         </div>
         <div v-else>
           <h3>Aucune commande en cours</h3>
@@ -25,7 +24,6 @@
           <h4>Articles commandés : {{ order.product_ids }}</h4>
           <h4>Prix total de la commande : {{ order.price }} €</h4>
           <h4>Livreur : {{ order.deliveryman_id }}</h4>
-          <button v-on:click="acceptOrder()">Aide/Signaler un problème</button>
         </div>
       </div>
 

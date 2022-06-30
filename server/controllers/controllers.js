@@ -95,6 +95,7 @@ const modifyEmail = async function (req, res, next) {
       {body: {email: newMail}}
     );
     console.log(response.data)
+    res.send(response.data)
     return response;
   } catch (e) {
     console.log("erreur");
@@ -111,7 +112,7 @@ const modifyPassword = async function (req, res, next) {
       "/users/" + idParam,
       {body: {password: newPwd}}
     );
-    console.log(response.data);
+    res.send(response.data);
     return response;
   } catch (e) {
     console.log("erreur");
@@ -154,12 +155,14 @@ const getDeliveryAddress = async function (req, res, next) {
     console.log(e);
   }
 };
-const acceptOrder = async function (req, res, next) {
+
+const updateOrder = async function (req, res, next) {
   const orderId = req.body.data.id;
   try {
     const response = await apiCallPut(req, '/orders/' + orderId, {
       data: {
-        deliveryman_id: req.body.data.deliveryman_id
+        deliveryman_id: req.body.data.deliveryman_id,
+        status: req.body.data.newState,
       }
     })
     console.log(response.data)
@@ -188,6 +191,30 @@ const restorerAcceptOrder = async function (req, res, next) {
   }
 };
 
+const createNewAddress = async function (req, res, next) {
+  try {
+    const response = await apiCallPost(
+      req,
+      '/users/' + req.body.data.user_id + '/addresses',
+      {data: {
+        first_name: req.body.data.firstName,
+        last_name: req.body.data.lastName,
+        address: req.body.data.address,
+        zipcode: req.body.data.zipcode,
+        city: req.body.data.city,
+        state: req.body.data.state,
+        country: req.body.data.country,
+        phone_number: req.body.data.phoneNumber,
+        additional_info: req.body.data.infos,
+        },
+      });
+      console.log(response.data)
+      return response.data;
+  } catch (e) {
+    console.log(e)
+  }
+}
+
 module.exports = {
   createAddress,
   createRestaurant,
@@ -200,6 +227,7 @@ module.exports = {
   modifyPassword,
   order,
   getDeliveryAddress,
-  acceptOrder,
+  updateOrder,
   restorerAcceptOrder,
+  createNewAddress,
 };

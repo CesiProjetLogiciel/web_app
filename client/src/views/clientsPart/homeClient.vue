@@ -12,7 +12,7 @@
           <h1>{{ restaurant.name }}</h1>
           <h3>{{ restaurant.category }}</h3>
           <p>"{{ restaurant.description }}"</p>
-          <button v-on:click="getDishesList(/*restaurant.id*/)">
+          <button v-on:click="getDishesList(restaurant.id)">
             Voir le restaurant
           </button>
         </div>
@@ -63,9 +63,9 @@ export default {
     this.restaurantsList = listRestaurants;
   },
   methods: {
-    async getDishesList() {
+    async getDishesList(restaurantId) {
       this.isRestaurantOpen = true;
-      const listDishes = await service.getDishesList("7");
+      const listDishes = await service.getDishesList(restaurantId);
       this.dishesList = listDishes;
     },
     getImgUrl(base64img) {
@@ -91,3 +91,9 @@ export default {
   },
 };
 </script>
+
+<style scoped lang="scss">
+.card {
+
+}
+</style>

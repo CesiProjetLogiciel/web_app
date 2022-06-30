@@ -19,7 +19,7 @@
 }
 
 html {
-  background-color: rgba(212, 212, 212, 0.596);
+  background-color: rgba(140, 218, 238, 0.596);
 }
 
 nav a {
@@ -51,17 +51,29 @@ nav a.router-link-exact-active {
       width: 100px;
     }
 
-    h1, h3, h4 {
+    h1,
+    h3,
+    h4 {
       margin: 0;
       margin-top: 10px;
     }
 
-    p {
-      font-weight: bold;
+    button {
+      box-shadow: 2px 2px 4px grey;
+      margin-top: 10px;
+      background-color: rgb(49, 154, 235);
+      border: none;
+      border-radius: 5px;
+      width: 200px;
+      transition: 0.25s;
+      height: 40px;
+      color: rgb(220, 220, 220);
     }
 
-    button {
-      margin-top: 10px;
+    button:hover {
+      background-color: white;
+      border: 1px solid rgb(49, 154, 235);
+      color: rgb(49, 154, 235);
     }
   }
 }

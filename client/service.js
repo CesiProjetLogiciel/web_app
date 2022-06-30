@@ -301,12 +301,13 @@ export async function getDeliveryAddress(userId) {
   }
 }
 
-export async function acceptOrder(orderId, deliveryManId) {
+export async function updateOrder(orderId, deliveryManId, newState) { // Delivery Man
   try {
-    const response = await axios.put(distAddress + "/acceptorder/", {
+    const response = await axios.put(distAddress + "/updateorder/", {
       data: {
         id: orderId,
         deliveryman_id: deliveryManId,
+        newState: newState,
       },
     });
     return response;
@@ -315,9 +316,9 @@ export async function acceptOrder(orderId, deliveryManId) {
   }
 }
 
-export async function restorerAcceptOrder(orderId) {
+export async function restorerAcceptOrder(orderId) { // Restorer
   try {
-    const response = await axios.put(distAddress, + "/restoreracceptorder/", {
+    const response = await axios.put(distAddress + "/restoreracceptorder/", {
       data: {
         orderID: orderId,
       }
@@ -325,5 +326,27 @@ export async function restorerAcceptOrder(orderId) {
     return response;
   } catch (e) {
     console.log(e);
+  }
+}
+
+export async function createNewAddress(userId, firstName, lastName, address, zipcode, city, state, country, phoneNumber, infos) {
+  try {
+    const response = await axios.post(distAddress + "/createNewAddress/", {
+      data: {
+        user_id: userId,
+        firstName: firstName,
+        lastName: lastName,
+        address: address,
+        zipcode: zipcode,
+        city: city,
+        state: state,
+        country: country,
+        phoneNumber: phoneNumber,
+        infos: infos,
+      },
+    });
+    return response.data;
+  } catch (e) {
+    console.log(e)
   }
 }

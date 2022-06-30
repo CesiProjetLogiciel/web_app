@@ -1,34 +1,32 @@
 <template>
   <div class="navbarr">
-    <div class="navbar_container"> <!-- v-if="this.getUserType === 'client'" -->
+    <div class="navbar_container"><!-- v-if="this.getUserType === 'client'" -->
       <nav>
-        <p>Client</p>
         <router-link to="/homePage">Accueil</router-link> |
         <router-link to="/ordersClient">Commandes</router-link> |
         <router-link to="/profilePage">Profil</router-link> |
         <router-link to="/basket">Panier</router-link>
       </nav>
+      <div class="navbar_container"><!-- v-if="this.getUserType === 'Restaurant'" -->
+        <nav>
+          <p>Restorer</p>
+          <router-link to="/actualorders">Commandes actuelles</router-link> |
+          <router-link to="/lastorders">Commandes finies</router-link> |
+          <router-link to="/restorerHomePage">Accueil Resto</router-link> |
+          <router-link to="/profilePage">Profil</router-link>
+        </nav>
+      </div>
+
+      <div class="navbar_container"><!-- v-if="this.getUserType === 'Delivery Man'" -->
+        <nav>
+          <p>DeliveryMan</p>
+          <router-link to="/deliveryManHomePage">Accueil Livreur</router-link> |
+          <router-link to="/ordersDeliveryMan">Commandes terminées</router-link> |
+          <router-link to="/profilePage">Profil</router-link> |
+          <router-link to="/parameters">Paramètres</router-link>
+        </nav>
+      </div>
       <router-view />
-    </div>
-
-    <div class="navbar_container"> <!-- v-if="this.getUserType === 'Restaurant'" -->
-      <nav>
-        <p>Restorer</p>
-        <router-link to="/actualorders">Commandes actuelles</router-link> |
-        <router-link to="/lastorders">Commandes finies</router-link> |
-        <router-link to="/restorerHomePage">Accueil Resto</router-link> |
-        <router-link to="/profilePage">Profil</router-link>
-      </nav>
-    </div>
-
-    <div class="navbar_container"> <!-- v-if="this.getUserType === 'Delivery Man'" -->
-      <nav>
-        <p>DeliveryMan</p>
-        <router-link to="/deliveryManHomePage">Accueil Livreur</router-link> |
-        <router-link to="/ordersDeliveryMan">Commandes terminées</router-link> |
-        <router-link to="/profilePage">Profil</router-link> |
-        <router-link to="/parameters">Paramètres</router-link>
-      </nav>
     </div>
   </div>
 </template>
@@ -42,6 +40,9 @@ export default {
     getUserType() {
       return loginInfo.state.userTYPE;
     },
+  },
+  data() {
+    return {};
   },
 };
 </script>

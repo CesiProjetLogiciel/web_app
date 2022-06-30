@@ -12,7 +12,6 @@
           <h4>Prix total de la commande : {{ order.price }} €</h4>
           <h4>Livreur :{{ order.deliveryman_id }}</h4>
           <button v-on:click="acceptOrder(order.id)">Accepter</button>
-          <button v-on:click="declineOrder()">Refuser</button>
         </div>
       </div>
     </div>
@@ -34,6 +33,7 @@
 
 <script>
 import NavbarRestorer from "../../components/navbarClient.vue";
+//import { store } from "../../store/index";
 
 const service = require("../../../service");
 

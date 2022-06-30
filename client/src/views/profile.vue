@@ -3,7 +3,7 @@
     <NavbarClient />
     <h1>PROFILE</h1>
     <ProfilManageAccount />
-    </div>
+  </div>
 </template>
 
 <script>
@@ -18,4 +18,3 @@ export default {
   },
 };
 </script>
-

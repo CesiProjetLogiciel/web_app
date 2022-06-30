@@ -42,6 +42,14 @@ export const store = new Vuex.Store({
       });
       return total;
     },
+
+    getQuantity: (state) => {
+      var totalProducts = 0;
+      state.products.forEach(element => {
+        totalProducts = totalProducts + element.quantity
+      });
+      return totalProducts;
+    }
   },
 });
 

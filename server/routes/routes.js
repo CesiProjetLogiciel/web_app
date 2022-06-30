@@ -27,8 +27,10 @@ router.post('/clientorder', controller.order)
 
 router.get('/getDeliveryAddress', controller.getDeliveryAddress)
 
-router.put('/acceptorder', controller.acceptOrder)
+router.put('/updateorder', controller.updateOrder)
 
-router.put('restoreracceptorder', controller.restorerAcceptOrder)
+router.put('/restoreracceptorder', controller.restorerAcceptOrder)
+
+router.post('/createNewAddress', controller.createNewAddress)
 
 module.exports = router;
