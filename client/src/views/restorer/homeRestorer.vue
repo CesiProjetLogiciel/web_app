@@ -30,7 +30,7 @@
       <div v-if="!createMode" class="cards">
         <div class="card" v-for="dish in dishesList" :key="dish.id">
           <div class="sections">
-            <h1>{{ dish.namer }}</h1>
+            <h1>{{ dish.name }}</h1>
             <input v-if="modifyMode" v-model="newName" type="text" placeholder="Nouveau nom">
           </div>
           <div class="sections">
@@ -73,7 +73,7 @@ export default {
     }
   },
   async beforeMount() {
-    const listDishes = await service.getDishesList(loginInfo.state.userID);
+    const listDishes = await service.getDishesList('62bda83ae2740427f576d3a1');
     console.log(loginInfo.state.userID)
     this.dishesList = listDishes;
   },

@@ -45,9 +45,9 @@ const postRegister = async function (req, res, next) {
     } catch(e) {
         return res.status(500).send(e.message);
     }
-  };
-  
-  const postLogin = async function (req, res, next) {
+};
+
+const postLogin = async function (req, res, next) {
     var body = req.body;
     try {
         var response = await apiCallLogin(req, body.email, body.password);

@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const API_URL = process.env.GATEWAY_API_URL;
+const API_URL = process.env.GATEWAY_API_URL + ':3000';
 const API_KEY = process.env.WEB_API_KEY;
 
 async function apiTokenRefresh() {
@@ -93,6 +93,7 @@ const apiCallGet = async function (req, route) {
 
 const apiCallPost = async function (req, route, body) {
     console.log("POST")
+    console.log(body)
     let response = await apiCall(req, "post", route, req.session.access_token, body);
     return response;
 }

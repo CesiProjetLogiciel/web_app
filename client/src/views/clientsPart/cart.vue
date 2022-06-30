@@ -66,10 +66,22 @@ export default {
       const userId = loginInfo.state.userID;
       //const billingAddress = await service.getBillingAddress();
       try {
-        const response = await service.order(userId, 'adresse', 'restaurantId', store.state.products, 'menu_ids', orderPrice);
+        console.log(store.state.products)
+        let populateIds = function(products) {
+          let ids = []
+          products.forEach((product) => {
+            for (let i = 0; i < product.quantity; i++){
+              ids.push(product.id)
+            }
+          })
+          return ids;
+        }
+        const response = await service.order(userId, this.myDeliveryAdrr, store.state.products[0].restaurantId, populateIds(store.state.products), 'menu_ids', orderPrice);
+        store.commit('emptyCart');
+        this.$alert('Votre commande à bien été envoyée au restaurant, en attente de validation...');
         console.log(response);
       } catch (e) {
-        console.log('no order')
+        console.log(e.message)
         return e;
       }
     },

@@ -1,5 +1,5 @@
 <template>
- <body>
+<body>
   <div id="card">
     <div id="card-content">
       <div id="card-title">
@@ -56,9 +56,9 @@ export default {
         var user_info = await login(this.email, this.password);
         console.log("You are logged in");
         loginInfo.commit('registerInfos', user_info)
-        if (this.myUserType === "client") {
+        if (this.myUserType === "Client" || this.myUserType === "Delivery man") {
           this.$router.push('/homePage');
-        } else if (this.myUserType === "restorer") {
+        } else if (this.myUserType === "Restaurant") {
           this.$router.push('/restorerHomePage');
         } else {
           console.log("type is not defined")

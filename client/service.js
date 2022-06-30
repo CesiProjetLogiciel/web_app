@@ -16,6 +16,7 @@ export async function login(email, password) {
         password: password,
       },
     });
+    console.log(response.data)
     return response.data;
   } catch (error) {
     console.log(error);
@@ -185,7 +186,7 @@ export async function order(
       data: {
         user_id: userId,
         delivery_address: deliveryAddress,
-        restaurant_id: restaurantId,
+        restaurant_id0: restaurantId,
         product_ids: productsId,
         menu_ids: menuIds,
         price: price,
@@ -260,6 +261,15 @@ export async function getOrders() {
   }
 }
 
+export async function getDeliveries() {
+  try {
+    const response = await axios.get(distAddress + "/deliveries/");
+    return response;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export async function modifyEmail(userId, newMail) {
   try {
     const response = await axios.put(distAddress + "/modifyemail/", {
@@ -303,7 +313,7 @@ export async function getDeliveryAddress(userId) {
 
 export async function updateOrder(orderId, deliveryManId, newState) { // Delivery Man
   try {
-    const response = await axios.put(distAddress + "/updateorder/", {
+    const response = await axios.put(distAddress + "/deliveries/", {
       data: {
         id: orderId,
         deliveryman_id: deliveryManId,

@@ -6,71 +6,45 @@
     </div>
     <div class="body">
       <div class="cards">
-        <div class="card">
-          <h2>Client Name</h2>
-          <p>Distance restaurant - client</p>
-          <p>Addresse Client</p>
-          <p>Adresse Restaurant</p>
-          <p>Rénumération:</p>
-        </div>
-
-        <div class="card">
-          <h2>Client Name</h2>
-          <p>Distance restaurant - client</p>
-          <p>Addresse Client</p>
-          <p>Adresse Restaurant</p>
-          <p>Rénumération:</p>
-        </div>
-
-        <div class="card">
-          <h2>Client Name</h2>
-          <p>Distance restaurant - client</p>
-          <p>Addresse Client</p>
-          <p>Adresse Restaurant</p>
-          <p>Rénumération:</p>
-        </div>
-
-        <div class="card">
-          <h2>Client Name</h2>
-          <p>Distance restaurant - client</p>
-          <p>Addresse Client</p>
-          <p>Adresse Restaurant</p>
-          <p>Rénumération:</p>
+        <div v-for="order in this.oldOrders" :key="order.id" class="card">
+          <h4>Numéro de la commande : {{ order.id }}</h4>
         </div>
       </div>
-      <button>Help</button>
-    </div>  
+    </div>
   </div>
 </template>
 
 <script>
 // @ is an alias to /src
 import NavBar from "../../components/navbarClient.vue";
+import { loginInfo } from "../../store/index";
+const service = require("../../../service");
 
 export default {
-  name: 'deliveryManHomePage',
+  name: "deliveryManHomePage",
   components: {
-    NavBar
-  }
-}
+    NavBar,
+  },
+  data() {
+    return {
+      orderState: "",
+      oldOrders: "",
+    };
+  },
+  async beforeMount() {
+    const ordersList = await service.getDeliveries();
+    console.log(ordersList)
+    this.oldOrders = ordersList.data.data.filter(
+      (i) => i.deliveryman_id === this.myUserId && i.status === 4
+    );
+  },
+  computed: {
+    myUserId() {
+      // Allows to know the state of the cart
+      return loginInfo.state.userID;
+    },
+  },
+};
 </script>
 
-<style lang="scss" scoped>
-.cards {
-  border: 1px solid red;
-  box-shadow: 1px 1px 1px black;
-  display: flex;
-  width: 99%;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.card {
-  border: 1px solid blue;
-  margin: 2px;
-  width: 48%;
-  img {
-    width: 100px;
-  }
-}
-</style>
+<style lang="scss" scoped></style>

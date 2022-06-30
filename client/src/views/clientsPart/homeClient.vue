@@ -24,7 +24,7 @@
           <h3>{{ dish.category }}</h3>
           <p>{{ dish.description }}</p>
           <h4>{{ dish.price }} €</h4>
-          <button v-on:click="addToCart(dish.id, dish.name, dish.price)">
+          <button v-on:click="addToCart(dish)">
             Ajouter au panier
           </button>
         </div>
@@ -73,18 +73,22 @@ export default {
       return fullUrl;
     },
 
-    addToCart(productId, productName, productPrice) {
-      var isPresent = store.getters.getProductsId(productId);
+    addToCart(dish) {
+      console.log(dish)
+      var isPresent = store.getters.getProductsId(dish.id);
       if (isPresent) { // Check if a same product is already in the cart and increment qty
-        var payload = {'price': productPrice, 'id': productId}
+        var payload = {'price': dish.price, 'id': dish.id}
         store.commit("increment", payload);
       } else {
         const dishInfos = {
-          id: productId,
-          productName: productName,
-          productPrice: productPrice,
+          id: dish.id,
+          productName: dish.name,
+          productPrice: dish.price,
+          restaurantId: dish.restaurant_id,
           quantity: 1,
         };
+        console.log('----------------------------------------')
+        console.log(dishInfos)
         store.commit("addToCart", dishInfos);
       }
     },

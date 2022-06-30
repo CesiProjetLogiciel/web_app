@@ -82,8 +82,19 @@ const addDish = async function (req, res) {
 
 const getOrders = async function (req, res, next) {
   const response = await apiCallGet(req, "/orders/");
+  console.log("--------------------")
+  console.log(response.data)
   res.send(response.data);
+  return response;
 };
+
+const getDeliveries = async function (req, res, next) {
+  const response = await apiCallGet(req, "/deliveries/");
+  console.log("--------------------")
+  console.log(response.data)
+  res.send(response.data);
+  return response;
+}
 
 const modifyEmail = async function (req, res, next) {
   const idParam = req.body.data.id;
@@ -121,19 +132,21 @@ const modifyPassword = async function (req, res, next) {
 };
 
 const order = async function (req, res, next) {
+  console.log('--------------------------------------')
+  console.log(req.body)
   try {
     const response = await apiCallPost(
       req,
       '/orders',
-      {data: {
-        user_id: req.body.data.uder_id,
+      {
+        user_id: req.body.data.user_id,
         delivery_address: req.body.data.delivery_address,
-        restaurant_id: req.body.data.restaurant_id,
+        billing_address: req.body.data.delivery_address,
+        restaurant_id: req.body.data.restaurant_id0,
         product_ids: req.body.data.product_ids,
-        menu_ids: req.body.data.menu_ids,
         price: req.body.data.price,
         payment_token: 'ejp9WgIVINlBL1QAl7AUDx36p',
-      }}
+      }
     )
     console.log(response)
   } catch (e) {
@@ -143,11 +156,10 @@ const order = async function (req, res, next) {
 };
 
 const getDeliveryAddress = async function (req, res, next) {
-  console.log(req.query.user_id)
   try {
     const response = await apiCallGet(
       req,
-      "/users/" + req.query.user_id + "/addresses"
+      "/users/" + req.query.user_id + "/addresses/"
     );
     res.send(response.data)
     return response.data;
@@ -160,10 +172,8 @@ const updateOrder = async function (req, res, next) {
   const orderId = req.body.data.id;
   try {
     const response = await apiCallPut(req, '/orders/' + orderId, {
-      data: {
         deliveryman_id: req.body.data.deliveryman_id,
         status: req.body.data.newState,
-      }
     })
     console.log(response.data)
     res.send(response.data)
@@ -230,4 +240,5 @@ module.exports = {
   updateOrder,
   restorerAcceptOrder,
   createNewAddress,
+  getDeliveries,
 };

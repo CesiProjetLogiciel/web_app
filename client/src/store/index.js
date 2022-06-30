@@ -29,6 +29,9 @@ export const store = new Vuex.Store({
         }
       });
     },
+    emptyCart(state) {
+      state.products = [];
+    }
   },
   getters: {
     getProductsId: (state) => (idSearched) => {

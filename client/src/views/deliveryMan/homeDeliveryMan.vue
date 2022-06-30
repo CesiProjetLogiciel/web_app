@@ -7,32 +7,27 @@
     <div class="body">
       <div class="cards">
 
+        <h3>- Commandes en attente -</h3>
         <div class="card" v-if="!this.delivering">
-          <div v-for="order in actualOrders.data" :key="order.id">
-            <div v-if="order.status === 'DELIVERED'">
-              <!-- CHANGER POUR 2 -->
-              <h3>- Commandes en cours -</h3>
-              <h4>Numéro de la commande : {{ order.id }}</h4>
-              <h4>Addresse de livraison : {{ order.delivery_address }}</h4>
-              <h4>Address du restaurant :</h4>
-              <button v-on:click="updateOrder(order.id, 3)">
-                Prendre en charge la commande
-              </button>
-            </div>
+          <div v-for="order in actualOrders" :key="order.id">
+            <h4>Numéro de la commande : {{ order.id }}</h4>
+            <h4>Addresse de livraison : {{ order.delivery_address }}</h4>
+            <h4>Addresse du restaurant : {{ order.restaurant_address }}</h4>
+            <button v-on:click="updateOrder(order.id, 3)">
+              Prendre en charge la commande
+            </button>
           </div>
         </div>
 
-        <div class="card" v-if="this.delivering">
-          <div v-for="order in actualOrders.data" :key="order.id">
-            <div v-if="order.status === 'DELIVERING' && order.deliveryman_id === myUserId">
-              <h3>- Commandes en cours -</h3>
-              <h4>Numéro de la commande : {{ order.id }}</h4>
-              <h4>Addresse de livraison : {{ order.delivery_address }}</h4>
-              <h4>Addresse du restaurant :</h4>
-              <button v-on:click="updateOrder(order.id, 4)">
-                Commande livrée
-              </button>
-            </div>
+        <h3>- Commandes en cours -</h3>
+        <div class="card" v-if="!this.delivering">
+          <div v-for="order in this.inDeliveryOrders" :key="order.id">
+            <h4>Numéro de la commande : {{ order.id }}</h4>
+            <h4>Addresse de livraison : {{ order.delivery_address }}</h4>
+            <h4>Addresse du restaurant : {{ order.restaurant_address }}</h4>
+            <button v-on:click="updateOrder(order.id, 4)">
+              Commande livrée
+            </button>
           </div>
         </div>
 
@@ -57,19 +52,22 @@ export default {
     return {
       actualOrders: "",
       delivering: false,
+      inDeliveryOrders: "",
       orderState: "",
     };
-  },
-  computed: {
-    myUserId() {
-      // Allows to know the state of the cart
-      return loginInfo.state.userID;
     },
-  },
   async beforeMount() {
-    const ordersList = await service.getOrders();
-    this.actualOrders = ordersList.data;
+    const ordersList = await service.getDeliveries();
+    this.actualOrders = ordersList.data.data.filter(i => i.deliveryman_id === this.myUserId && i.status === 2);
+    console.log(this.actualOrders)
+    this.inDeliveryOrders = (await service.getDeliveries()).data.data.filter(i => i.deliveryman_id === this.myUserId && i.status === 3);
   },
+    computed: {
+      myUserId() {
+        // Allows to know the state of the cart
+        return loginInfo.state.userID;
+      },
+    },
   methods: {
     async updateOrder(orderId, newState) {
       this.delivering = true;
@@ -77,6 +75,9 @@ export default {
       try {
         const response = await service.updateOrder(orderId, userId, newState);
         console.log(response);
+        if (newState === 4) {
+          this.$alert("La commande à été livrée, merci !");
+        }
       } catch (e) {
         console.log(e);
       }
